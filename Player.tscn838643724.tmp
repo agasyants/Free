@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmljcpcyimrfu"]
+
+[ext_resource type="Script" uid="uid://dcmki6escbhnr" path="res://Player.gd" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://d4g5auo6ayuq3" path="res://Bullet.tscn" id="2_kpjcp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhfnw"]
+radius = 15.0333
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0rwas"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_xhfnw")
+speed = null
+dash_speed = null
+dash_duration = null
+dash_cooldown = null
+bullet_scene = ExtResource("2_kpjcp")
+shoot_cooldown = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xhfnw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.51992e-06, 0.499999)
+scale = Vector2(26, 27)
+texture = SubResource("CanvasTexture_0rwas")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="Muzzle" type="Marker2D" parent="."]

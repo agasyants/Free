@@ -1,0 +1,14 @@
+extends Node
+
+class_name Types
+
+enum PlayerState {
+	IDLE,
+	SHOOT,
+	CHARGING_DASH,
+	DASH,
+	CHARGING_DASH_AND_ATTACK,
+	CHARGING_ATTACK_AND_DASHING,
+	CHARGING_ATTACK,
+	ATTACK
+}
