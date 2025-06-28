@@ -9,7 +9,7 @@ class_name AnimationComponent
 
 # Настройки мигания
 @export var blink_duration: float = 0.1  # Длительность одного мигания
-@export var sprite_path: String = "Sprite2D"  # Путь к спрайту
+@export var sprite_path: String = "Sprite2D"
 
 # Внутренние переменные
 var target_direction: Vector2 = Vector2.ZERO

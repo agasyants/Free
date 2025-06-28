@@ -1,14 +1,16 @@
 extends Node
 class_name BossAction
 
-signal completed
+var boss: CharacterBody2D = null
+var finished := false
+var timer: float = 0.0
 
-var boss
+func _init() -> void:
+	timer = 0.0
 
-func run(boss_ref) -> void:
-	boss = boss_ref
-	await execute()
-	emit_signal("completed")
+func update(delta: float) -> void:
+	timer += delta
+	# Override in subclass
 
-func execute():
-	pass
+func is_finished() -> bool:
+	return finished

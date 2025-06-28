@@ -19,7 +19,7 @@ func _physics_process(delta):
 	dash_component.handle(delta)
 	animation_component.handle_animation(delta)
 	attack_component.handle_attack(delta)
-	print(state)
+	#print(state)
 	# Применяем движение
 	move_and_slide()
 	

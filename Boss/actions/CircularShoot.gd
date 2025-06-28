@@ -1,17 +1,35 @@
 extends BossAction
-class_name CircularShootAction
+class_name CircleAndShootAction
 
-var shots_count: int = 8
-var delay_between_shots: float = 0.1
+var duration := 2.0
+var shoot_interval := 0.5
+var shoot_timer := 0.0
+var radius := 150.0
+var angular_speed := 2.0
+var center: Vector2
 
-func execute():
-	print('CircularShoot')
-	var angle_step = 2 * PI / shots_count
-	
-	for i in range(shots_count):
-		var angle = i * angle_step
-		var target_pos = boss.global_position + Vector2(cos(angle), sin(angle)) * 500
-		boss.shooting.shoot_at_position(target_pos)
-		
-		if i < shots_count - 1:
-			await boss.get_tree().create_timer(delay_between_shots).timeout
+func update(delta: float):
+	print('CircleAndShootAction')
+	timer += delta
+	shoot_timer += delta
+
+	if timer == delta:
+		center = boss.player.global_position
+
+	# Расчёт позиции по окружности
+	var angle = angular_speed * timer
+	var offset = Vector2(cos(angle), sin(angle)) * radius
+	var target = center + offset
+	boss.movement.move_towards(target, 250)
+
+	if shoot_timer >= shoot_interval:
+		shoot_timer = 0.0
+		var dir = boss.shoot.get_direction_to_player()
+		boss.shoot.shoot(boss.global_position, dir, 600)
+
+	boss.movement.update(delta)
+	#boss.shoot.update(delta)
+
+	if timer >= duration:
+		boss.movement.stop()
+		finished = true
