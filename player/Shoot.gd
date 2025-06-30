@@ -74,12 +74,10 @@ func create_bullet(position: Vector2, direction: Vector2) -> void:
 	
 	set_bullet_direction(bullet, direction)
 
-func set_bullet_direction(bullet: Node, direction: Vector2) -> void:
+func set_bullet_direction(bullet: Bullet, direction: Vector2) -> void:
 	"""Устанавливает направление пули используя доступные методы"""
-	if bullet.has_method("set_direction"):
-		bullet.set_direction(direction)
-	elif "direction" in bullet:
-		bullet.direction = direction
+	if bullet.has_method("setup"):
+		bullet.setup(direction)
 	else:
 		push_warning("Пуля не имеет метода set_direction или свойства direction")
 
@@ -90,7 +88,7 @@ func get_shoot_direction() -> Vector2:
 
 func can_shoot() -> bool:
 	"""Проверяет, может ли игрок стрелять"""
-	return shoot_cooldown_timer <= 0.0 and bullet_scene != null and !body.dash_component.is_dashing() and !body.dash_component.is_charging() and body.state != types.PlayerState.CHARGING_ATTACK and body.state != types.PlayerState.ATTACK
+	return shoot_cooldown_timer <= 0.0 and bullet_scene != null and !body.dash_component.is_dashing() and !body.dash_component.is_charging() and body.state != types.PlayerState.CHARGING_ATTACK and body.state != types.PlayerState.ATTACK and body.state != types.PlayerState.PARRY
 
 func get_shoot_cooldown_progress() -> float:
 	"""Возвращает прогресс кулдауна стрельбы (0.0 - 1.0)"""

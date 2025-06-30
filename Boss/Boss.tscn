@@ -1,21 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://dicvokuwuqkk3"]
+[gd_scene load_steps=10 format=3 uid="uid://dicvokuwuqkk3"]
 
 [ext_resource type="Script" uid="uid://dqyfbarv35cmx" path="res://Boss/Boss.gd" id="1_sbnmg"]
 [ext_resource type="Script" uid="uid://vhcfmbm21o3d" path="res://Boss/components/BossMovement.gd" id="2_sdoex"]
 [ext_resource type="Script" uid="uid://crfiufq67eof7" path="res://Boss/components/BossShooting.gd" id="3_onhe5"]
 [ext_resource type="PackedScene" uid="uid://dgxwxts1h0p4k" path="res://Boss/BossBullet.tscn" id="4_l78yc"]
 [ext_resource type="Script" uid="uid://7qk54t66fmrl" path="res://Boss/components/BossHealth.gd" id="4_onhe5"]
+[ext_resource type="PackedScene" uid="uid://dxw2oi8gj2boo" path="res://Bullets/HomingBullet.tscn" id="5_0rlmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sbnmg"]
 size = Vector2(64, 65)
 
 [sub_resource type="Gradient" id="Gradient_sbnmg"]
+offsets = PackedFloat32Array(0, 0.264706, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.47451, 0, 0.141176, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4xi7c"]
 gradient = SubResource("Gradient_sbnmg")
-fill = 2
-fill_from = Vector2(0.901709, 0.512821)
-fill_to = Vector2(0, 1)
+fill_from = Vector2(1, 0.5)
+fill_to = Vector2(0, 0.5)
 
 [node name="Boss1" type="CharacterBody2D"]
 collision_layer = 8
@@ -42,7 +44,7 @@ script = ExtResource("2_sdoex")
 script = ExtResource("3_onhe5")
 default_bullet_scene = ExtResource("4_l78yc")
 fast_bullet_scene = ExtResource("4_l78yc")
-heavy_bullet_scene = ExtResource("4_l78yc")
+heavy_bullet_scene = ExtResource("5_0rlmi")
 
 [node name="BossHealthComponent" type="Node" parent="Components"]
 script = ExtResource("4_onhe5")

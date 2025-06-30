@@ -1,23 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmljcpcyimrfu"]
+[gd_scene load_steps=12 format=3 uid="uid://cmljcpcyimrfu"]
 
 [ext_resource type="Script" uid="uid://dcmki6escbhnr" path="res://player/Player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://bsmdmgp5v847t" path="res://player/Movement.gd" id="2_cxr5p"]
 [ext_resource type="Script" uid="uid://cbnsa4xrbfft0" path="res://player/Dash.gd" id="3_tdg3f"]
 [ext_resource type="Script" uid="uid://syivd0wcff2t" path="res://player/Shoot.gd" id="4_dtqjt"]
 [ext_resource type="Script" uid="uid://2hlonibn60ew" path="res://player/Boundary.gd" id="5_5ncpa"]
-[ext_resource type="PackedScene" uid="uid://d4g5auo6ayuq3" path="res://Bullet.tscn" id="5_tdg3f"]
+[ext_resource type="PackedScene" uid="uid://d4g5auo6ayuq3" path="res://Bullets/Bullet.tscn" id="5_tdg3f"]
 [ext_resource type="Script" uid="uid://cy0qbex8752bj" path="res://player/Animation.gd" id="7_dtqjt"]
 [ext_resource type="Script" uid="uid://7e0abbf3so8k" path="res://player/Melee.gd" id="8_5ncpa"]
 [ext_resource type="Texture2D" uid="uid://b0dnxs32l0co0" path="res://player/arr.png" id="9_wi0c6"]
 [ext_resource type="Script" uid="uid://bhjs4pme1aisq" path="res://player/Health.gd" id="10_ndjxb"]
+[ext_resource type="Script" uid="uid://c6teusecm0lcy" path="res://player/Parry.gd" id="11_5qrx2"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_xhfnw")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 1)
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(21.135, 0)
@@ -57,3 +55,6 @@ script = ExtResource("7_dtqjt")
 
 [node name="HealthComponent" type="Node" parent="Components"]
 script = ExtResource("10_ndjxb")
+
+[node name="ParryComponent" type="Node" parent="Components"]
+script = ExtResource("11_5qrx2")

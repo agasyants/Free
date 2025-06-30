@@ -6,7 +6,6 @@ var shoot_time := 0.3
 var shot := false
 
 func update(delta: float):
-	print('BackstepShotAction')
 	timer += delta
 
 	var dir = boss.movement.get_direction_to_player()
@@ -14,7 +13,7 @@ func update(delta: float):
 
 	if not shot and timer >= shoot_time:
 		shot = true
-		boss.shoot.shoot(boss.global_position, dir, 700)
+		boss.shoot.shoot(boss.global_position, dir)
 
 	boss.movement.update(delta)
 	#boss.shoot.update(delta)

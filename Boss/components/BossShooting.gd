@@ -11,7 +11,7 @@ func _ready():
 	boss = get_parent().get_parent() as Node2D
 
 # Запустить пулю
-func shoot(origin: Vector2, direction: Vector2, speed: float, bullet_type: String = "default"):
+func shoot(origin: Vector2, direction: Vector2, bullet_type: String = "default"):
 	var bullet_scene = get_bullet(bullet_type)
 	if bullet_scene == null:
 		push_warning("Пуля типа '%s' не задана" % bullet_type)
@@ -22,7 +22,7 @@ func shoot(origin: Vector2, direction: Vector2, speed: float, bullet_type: Strin
 
 	bullet.global_position = origin
 	if bullet.has_method("setup"):
-		bullet.setup(direction.normalized(), speed)
+		bullet.setup(direction.normalized())
 
 # Вернуть нужный тип пули
 func get_bullet(bullet_type: String) -> PackedScene:

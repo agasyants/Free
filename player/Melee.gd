@@ -55,7 +55,7 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 ## Эту функцию нужно вызывать из _physics_process родителя.
-func handle_attack(delta: float) -> void:
+func handle(delta: float) -> void:
 	# Обновляем кулдаун
 	if cooldown_timer > 0.0:
 		cooldown_timer = max(0.0, cooldown_timer - delta)

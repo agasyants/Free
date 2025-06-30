@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgxwxts1h0p4k"]
 
-[ext_resource type="Script" uid="uid://casgbtn5s2mk" path="res://Boss/BossBullet.gd" id="1_ltvge"]
+[ext_resource type="Script" uid="uid://dsd45nxn8isri" path="res://player/Bullet.gd" id="1_ltvge"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oky5o"]
-radius = 9.0
+radius = 12.0
 
 [sub_resource type="Gradient" id="Gradient_ltvge"]
 offsets = PackedFloat32Array(0.272727, 0.681818, 0.733766)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0)
+colors = PackedColorArray(0.136362, 9.09972e-08, 3.30899e-08, 1, 1, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_t1qwv"]
 gradient = SubResource("Gradient_ltvge")
@@ -15,14 +15,17 @@ fill = 1
 fill_from = Vector2(0.5, 0.495413)
 
 [node name="Area2D" type="Area2D"]
-collision_layer = 2
-collision_mask = 8
+collision_layer = 10
+collision_mask = 10
 script = ExtResource("1_ltvge")
+damage = 10
+health = 3
+is_player = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 1.04191)
 shape = SubResource("CircleShape2D_oky5o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.4, 0.4)
 texture = SubResource("GradientTexture2D_t1qwv")

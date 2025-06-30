@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cv7c7jw3g37iy"]
+[gd_scene load_steps=9 format=3 uid="uid://cv7c7jw3g37iy"]
 
 [ext_resource type="PackedScene" uid="uid://cmljcpcyimrfu" path="res://player/Player.tscn" id="1_s5j47"]
 [ext_resource type="PackedScene" uid="uid://dicvokuwuqkk3" path="res://Boss/Boss.tscn" id="2_h11cf"]
 [ext_resource type="Script" uid="uid://dp5yfvb77d3u5" path="res://Boss/BossHPBar.gd" id="3_2jfjj"]
+[ext_resource type="Script" uid="uid://dpxgxcp7pkr5e" path="res://scripts/CameraController.gd" id="4_ntnxr"]
 
 [sub_resource type="Gradient" id="Gradient_vmibe"]
 offsets = PackedFloat32Array(0.485915)
@@ -103,3 +104,7 @@ grow_horizontal = 0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_ntnxr")
 texture_progress = SubResource("GradientTexture2D_bvijt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+script = ExtResource("4_ntnxr")

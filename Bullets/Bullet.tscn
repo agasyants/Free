@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4g5auo6ayuq3"]
 
-[ext_resource type="Script" uid="uid://dsd45nxn8isri" path="res://player/Bullet.gd" id="1_ayd6b"]
+[ext_resource type="Script" uid="uid://dsd45nxn8isri" path="res://player/Bullet.gd" id="1_jexuk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ayd6b"]
 
@@ -17,7 +17,7 @@ fill_to = Vector2(1, 0.5)
 [node name="Area2D" type="Area2D"]
 collision_layer = 2
 collision_mask = 8
-script = ExtResource("1_ayd6b")
+script = ExtResource("1_jexuk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ayd6b")

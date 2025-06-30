@@ -9,7 +9,6 @@ var angular_speed := 2.0
 var center: Vector2
 
 func update(delta: float):
-	print('CircleAndShootAction')
 	timer += delta
 	shoot_timer += delta
 
@@ -25,7 +24,7 @@ func update(delta: float):
 	if shoot_timer >= shoot_interval:
 		shoot_timer = 0.0
 		var dir = boss.shoot.get_direction_to_player()
-		boss.shoot.shoot(boss.global_position, dir, 600)
+		boss.shoot.shoot(boss.global_position, dir)
 
 	boss.movement.update(delta)
 	#boss.shoot.update(delta)

@@ -7,7 +7,8 @@ var state: types.PlayerState = types.PlayerState.IDLE
 @onready var movement_component: MovementComponent = components.get_node("MovementComponent")
 @onready var dash_component: DashComponent = components.get_node("DashComponent")
 @onready var shooting_component: ShootingComponent = components.get_node("ShootingComponent")
-@onready var boundary_component: BoundaryComponent = components.get_node("BoundaryComponent")
+#@onready var boundary_component: BoundaryComponent = components.get_node("BoundaryComponent")
+@onready var parry_component: ParryComponent = components.get_node("ParryComponent")
 @onready var attack_component: MeleeAttackComponent = components.get_node("MeleeAttackComponent")
 @onready var animation_component: AnimationComponent = components.get_node("AnimationComponent")
 @onready var health_component: HealthComponent = components.get_node("HealthComponent")
@@ -18,13 +19,14 @@ func _physics_process(delta):
 	shooting_component.handle(delta)
 	dash_component.handle(delta)
 	animation_component.handle_animation(delta)
-	attack_component.handle_attack(delta)
+	attack_component.handle(delta)
+	parry_component.handle(delta)
 	#print(state)
 	# Применяем движение
 	move_and_slide()
 	
 	# Ограничиваем границами экрана
-	boundary_component.clamp_to_screen()
+	#boundary_component.clamp_to_screen()
 
 # Публичные методы для взаимодействия компонентов
 func get_current_velocity() -> Vector2:

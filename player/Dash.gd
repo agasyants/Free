@@ -41,7 +41,6 @@ func _ready():
 		push_error("MovementComponent not found on parent node.")
 
 func _input(event: InputEvent) -> void:
-	# Проверяем, можно ли начать зарядку, и НАЖАТА ли кнопка "dash"
 	if event.is_action_pressed("dash") and can_charge():
 		start_charging()
 		get_viewport().set_input_as_handled()
