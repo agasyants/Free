@@ -1,6 +1,8 @@
 extends CharacterBody2D
+class_name Player
 
 var state: types.PlayerState = types.PlayerState.IDLE
+var radius: float = 22
 
 # Компоненты
 @onready var components = $Components

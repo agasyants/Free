@@ -24,12 +24,10 @@ func setup(bullet_direction: Vector2) -> void:
 
 func parry() -> void:
 	is_player = true
-
 	var boss = get_tree().get_nodes_in_group("enemies").front()
 	if boss and boss is Node2D:
 		velocity =  (boss.global_position - global_position).normalized()
 		speed *= 1.5
-
 
 func take_damage(amount: int) -> void:
 	health -= amount
@@ -52,13 +50,15 @@ func _on_area_entered(area: Area2D) -> void:
 				other.die()
 				die()
 
+# Парирование или получение урона
 func _on_body_entered(body: Node) -> void:
-	# Парирование
 	if body.is_in_group("player") and body.state == types.PlayerState.PARRY:
 		parry()
 		return
+		
+	if body.is_in_group("player") and body.state == types.PlayerState.DASH:
+		return
 
-	# Урон
 	if is_player:
 		if body.is_in_group("enemies") and body.has_method("take_damage"):
 			body.take_damage(damage)

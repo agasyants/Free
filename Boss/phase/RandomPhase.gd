@@ -1,12 +1,17 @@
 extends BossPhase
 class_name RandomPhase
-
+#
 var pool := [
 	DashAttackAction,
 	TripleSpreadShotAction,
 	CircleAndShootAction,
 	BackstepShotAction,
-	HeavySnipeAction
+	HeavySnipeAction,
+	LaserSweepRightAction,
+	LaserSweepLeftAction,
+	DualLaserSweepAction,
+	ManyRingsWavesAction,
+	RingWaveAttackAction
 ]
 
 func get_initial_action() -> BossAction:

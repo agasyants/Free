@@ -1,7 +1,7 @@
 extends BossAction
 class_name BackstepShotAction
 
-var move_duration := 0.6
+var move_duration := 1.0
 var shoot_time := 0.3
 var shot := false
 

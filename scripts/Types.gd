@@ -19,7 +19,7 @@ var state_speeds = {
 	PlayerState.SHOOT: 180.0,                         # Замедлен во время стрельбы
 	PlayerState.CHARGING_DASH: 50.0,                  # Сильно замедлен при зарядке рывка
 	PlayerState.DASH: 400.0,                          # Очень быстрый во время рывка
-	PlayerState.CHARGING_DASH_AND_ATTACK: 50.0,       # Почти неподвижен при двойной зарядке
+	PlayerState.CHARGING_DASH_AND_ATTACK: 20.0,       # Почти неподвижен при двойной зарядке
 	PlayerState.CHARGING_ATTACK_AND_DASHING: 0.0,     # Быстрый рывок с подготовкой атаки
 	PlayerState.CHARGING_ATTACK: 50.0,                # Замедлен при зарядке атаки
 	PlayerState.ATTACK: 50.0,                         # Немного замедлен во время атаки

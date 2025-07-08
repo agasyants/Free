@@ -6,6 +6,8 @@ class_name Boss
 @onready var movement: BossMovementComponent = components.get_node("BossMovementComponent")
 @onready var shoot: BossShootComponent = components.get_node("BossShootingComponent")
 @onready var health: BossHealthComponent = components.get_node("BossHealthComponent")
+@onready var laser: BossLaserComponent = components.get_node("BossLaserComponent")
+@onready var wave: BossWaveComponent = components.get_node("BossWaveComponent")
 
 var phase: BossPhase
 var current_phase_index := 0
@@ -22,6 +24,7 @@ func _ready():
 	_start_next_phase()
 
 func _process(delta):
+	wave.update(delta)
 	if phase:
 		phase.update(delta)
 		
