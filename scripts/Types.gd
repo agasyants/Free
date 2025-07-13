@@ -14,6 +14,18 @@ enum PlayerState {
 	PARRY
 }
 
+const PlayerStateNames = {
+	PlayerState.IDLE: "Idle",
+	PlayerState.SHOOT: "Shoot",
+	PlayerState.CHARGING_DASH: "Charging Dash",
+	PlayerState.DASH: "Dash",
+	PlayerState.CHARGING_DASH_AND_ATTACK: "Charging Dash & Attack",
+	PlayerState.CHARGING_ATTACK_AND_DASHING: "Charging Attack & Dashing",
+	PlayerState.CHARGING_ATTACK: "Charging Attack",
+	PlayerState.ATTACK: "Attack",
+	PlayerState.PARRY: "Parry"
+}
+
 var state_speeds = {
 	PlayerState.IDLE: 320.0,                          # Обычная скорость передвижения
 	PlayerState.SHOOT: 180.0,                         # Замедлен во время стрельбы

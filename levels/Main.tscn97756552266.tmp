@@ -257,7 +257,6 @@ action = "parry"
 visibility_mode = 1
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-visible = false
 offset_left = 133.0
 offset_top = 188.0
 offset_right = 738.0

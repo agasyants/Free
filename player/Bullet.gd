@@ -5,6 +5,7 @@ class_name Bullet
 @export var damage: int = 5
 @export var health: int = 1
 @export var is_player: bool = true
+@export var lifetime: float = 8.0
 var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -14,6 +15,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	update_bullet(delta)
 	position += velocity * speed * delta
+	lifetime -= delta
+	if lifetime <= 0:
+		die()
 
 func update_bullet(_delta: float) -> void:
 	# Override in subclasses if needed

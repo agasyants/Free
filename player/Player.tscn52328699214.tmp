@@ -15,8 +15,8 @@
 radius = 17.0
 
 [sub_resource type="Gradient" id="Gradient_ndjxb"]
-offsets = PackedFloat32Array(0.610294, 0.628676, 0.698529, 0.724265)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.584559, 0.632353, 0.698529)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5qrx2"]
 gradient = SubResource("Gradient_ndjxb")

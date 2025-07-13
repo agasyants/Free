@@ -13,7 +13,7 @@ func fire_lasers(lasers_array: Array):
 	current_lasers.clear()
 
 	var viewport_rect = get_viewport().get_visible_rect()
-	var max_distance = max(viewport_rect.size.x, viewport_rect.size.y) * 1.5
+	var max_distance = max(viewport_rect.size.x, viewport_rect.size.y) * 2.0
 	var space_state = get_world_2d().direct_space_state
 
 	for laser in lasers_array:

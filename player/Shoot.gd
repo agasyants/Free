@@ -13,6 +13,7 @@ var shoot_cooldown_timer: float = 0.0
 # Ссылки на узлы
 @onready var body: CharacterBody2D = get_parent().get_parent()
 @onready var muzzle: Marker2D = body.get_node("Muzzle")
+@onready var aim_stick: VirtualStick = get_node("/root/Node2D/CanvasLayer/RightStick")
 
 func _ready():
 	validate_components()
@@ -30,7 +31,7 @@ func handle(delta: float) -> void:
 	update_cooldown_timer(delta)
 	
 	# Проверяем нажатие кнопки стрельбы
-	var shoot_pressed = Input.is_action_pressed("shoot")
+	var shoot_pressed = Input.is_action_pressed("shoot") or aim_stick.get_vector().length() > 0.1
 	
 	if shoot_pressed:
 		if can_shoot():
@@ -82,9 +83,12 @@ func set_bullet_direction(bullet: Bullet, direction: Vector2) -> void:
 		push_warning("Пуля не имеет метода set_direction или свойства direction")
 
 func get_shoot_direction() -> Vector2:
-	"""Возвращает направление стрельбы (к позиции мыши)"""
-	var mouse_pos = body.get_global_mouse_position()
-	return (mouse_pos - body.global_position).normalized()
+	"""Возвращает направление стрельбы (к позиции мыши или из стика)"""	
+	if aim_stick.get_vector().length() > 0.1:
+		return aim_stick.get_vector().normalized()
+	else:
+		var mouse_pos = body.get_global_mouse_position()
+		return (mouse_pos - body.global_position).normalized()
 
 func can_shoot() -> bool:
 	"""Проверяет, может ли игрок стрелять"""

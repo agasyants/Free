@@ -19,9 +19,13 @@ func _ready():
 	connect("visibility_changed", _on_visibility_changed)
 
 func _on_visibility_changed():
-	visible = is_visible_in_tree()
+	if not is_visible_in_tree():
+		trail.clear()
 
 func _process(delta):
+	if not is_visible_in_tree():
+		return
+	
 	time += delta
 	queue_redraw()
 	
@@ -32,10 +36,10 @@ func _process(delta):
 			trail.pop_back()
 
 func _draw():
-	if not visible:
+	if not is_visible_in_tree():
 		return
-	var t = time
 	
+	var t = time
 	# Агрессивный трейл из точек
 	for i in range(trail.size()):
 		var pos = to_local(trail[i])

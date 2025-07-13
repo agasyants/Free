@@ -72,7 +72,7 @@ func handle(delta: float) -> void:
 		charge_timer = min(charge_timer + delta, max_charge_time)
 
 func start_hold_timing():
-	body.state = types.PlayerState.CHARGING_ATTACK
+	#body.state = types.PlayerState.CHARGING_ATTACK
 	is_hold_timing = true
 	hold_timer = 0.0
 
@@ -81,8 +81,8 @@ func end_hold_timing():
 	hold_timer = 0.0
 
 func start_charging():
-	if body.state != types.PlayerState.CHARGING_ATTACK:
-		body.state = types.PlayerState.CHARGING_ATTACK
+	#if body.state != types.PlayerState.CHARGING_ATTACK:
+		#body.state = types.PlayerState.CHARGING_ATTACK
 	charge_timer = 0.0
 	if movement_component and movement_component.has_method("set_active"):
 		movement_component.set_active(false)

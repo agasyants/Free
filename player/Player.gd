@@ -14,7 +14,7 @@ var radius: float = 22
 @onready var attack_component: MeleeAttackComponent = components.get_node("MeleeAttackComponent")
 @onready var animation_component: AnimationComponent = components.get_node("AnimationComponent")
 @onready var health_component: HealthComponent = components.get_node("HealthComponent")
-
+@onready var label = get_node("/root/Node2D/CanvasLayer/Label")
 func _physics_process(delta):
 	# Обрабатываем все компоненты
 	movement_component.handle(delta)
@@ -24,6 +24,7 @@ func _physics_process(delta):
 	attack_component.handle(delta)
 	parry_component.handle(delta)
 	#print(state)
+	label.text = types.PlayerStateNames[state]
 	# Применяем движение
 	move_and_slide()
 	

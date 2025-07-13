@@ -9,17 +9,17 @@
 [ext_resource type="Script" uid="uid://ceyu434inj5hb" path="res://Boss/components/BossLaser.gd" id="7_7ck7k"]
 [ext_resource type="Script" uid="uid://uskxlv85ywp5" path="res://Boss/components/BossWave.gd" id="8_yhums"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbnmg"]
-size = Vector2(64, 65)
+[sub_resource type="CircleShape2D" id="CircleShape2D_yhums"]
+radius = 32.0039
 
 [sub_resource type="Gradient" id="Gradient_sbnmg"]
-offsets = PackedFloat32Array(0, 0.264706, 1)
-colors = PackedColorArray(1, 0, 0, 1, 0.47451, 0, 0.141176, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.533088, 0.672794, 0.720588)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4xi7c"]
 gradient = SubResource("Gradient_sbnmg")
-fill_from = Vector2(1, 0.5)
-fill_to = Vector2(0, 0.5)
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Boss1" type="CharacterBody2D"]
 z_index = 1
@@ -29,7 +29,7 @@ script = ExtResource("1_sbnmg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0.5)
-shape = SubResource("RectangleShape2D_sbnmg")
+shape = SubResource("CircleShape2D_yhums")
 debug_color = Color(0.836953, 0.366634, 0.994606, 0.42)
 
 [node name="Boss" type="Node2D" parent="."]

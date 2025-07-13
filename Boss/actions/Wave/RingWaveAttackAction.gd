@@ -17,5 +17,5 @@ func update(delta: float) -> void:
 			40
 		))
 
-	if timer >= 2.0:
+	if timer >= 1.0:
 		finished = true
