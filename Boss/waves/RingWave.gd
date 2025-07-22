@@ -29,9 +29,10 @@ func _init(
 	color = _color
 	thickness = _thickness
 	
-	# Инициализация фаз частиц
-	for i in range(PARTICLE_COUNT):
-		_particle_phases.append(randf() * TAU)
+	if Settings.is_trails():
+		# Инициализация фаз частиц
+		for i in range(PARTICLE_COUNT):
+			_particle_phases.append(randf() * TAU)
 
 func get_radii() -> Array:
 	if timer != _last_timer:
@@ -57,33 +58,34 @@ func render(canvas: CanvasItem) -> void:
 	var pulse_thickness = thickness * pulse
 	
 	if inner > 0:
-		canvas.draw_circle(center, inner, Color(0, 0, 0, 0))
+		canvas.draw_circle(center, inner, Color(0, 0, 0, 0), true, -1, Settings.is_aa())
 	
 	# Основное кольцо с пульсацией
 	canvas.draw_arc(center, outer, 0, TAU, RENDER_STEPS, 
-		Color(color.r, color.g, color.b, pulse * 0.8), pulse_thickness)
+		Color(color.r, color.g, color.b, pulse * 0.8), pulse_thickness, Settings.is_aa())
 	
 	# Свечение краев
 	var glow_width = 3.0 * (1.0 - progress)
 	canvas.draw_arc(center, outer, 0, TAU, RENDER_STEPS, 
-		GLOW_COLOR, glow_width)
+		GLOW_COLOR, glow_width, Settings.is_aa())
 		
 	if inner > 0:
 		canvas.draw_arc(center, inner, 0, TAU, RENDER_STEPS, 
-			GLOW_COLOR, glow_width)
+			GLOW_COLOR, glow_width, Settings.is_aa())
 	
-	# Энергетические частицы
-	for i in range(PARTICLE_COUNT):
-		var angle = _particle_phases[i] + timer * 5.0
-		var particle_pulse = sin(angle * 3.0) * 0.5 + 0.5
-		var radius_offset = particle_pulse * 4.0
-		var particle_radius = outer + radius_offset
-		
-		var pos = center + Vector2(cos(angle), sin(angle)) * particle_radius
-		var size = 2.0 + particle_pulse * 3.0
-		var alpha = 0.5 + particle_pulse * 0.5
-		
-		canvas.draw_circle(pos, size, Color(GLOW_COLOR.r, GLOW_COLOR.g, GLOW_COLOR.b, alpha))
+	if Settings.is_trails():
+		# Энергетические частицы
+		for i in range(PARTICLE_COUNT):
+			var angle = _particle_phases[i] + timer * 5.0
+			var particle_pulse = sin(angle * 3.0) * 0.5 + 0.5
+			var radius_offset = particle_pulse * 4.0
+			var particle_radius = outer + radius_offset
+			
+			var pos = center + Vector2(cos(angle), sin(angle)) * particle_radius
+			var size = 2.0 + particle_pulse * 3.0
+			var alpha = 0.5 + particle_pulse * 0.5
+			
+			canvas.draw_circle(pos, size, Color(GLOW_COLOR.r, GLOW_COLOR.g, GLOW_COLOR.b, alpha), true, -1, Settings.is_aa())
 
 func is_inside(point: Vector2, radius: float = 0.0) -> bool:
 	var r = get_radii()

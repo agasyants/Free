@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://rx3p2ragpv5j"]
+
+[ext_resource type="Script" uid="uid://bg3a80qdgk515" path="res://menu/MainMenu.gd" id="1_su865"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_su865"]
+font_size = 200
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_su865")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.034
+offset_right = -1.0
+offset_bottom = 696.52
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.466
+anchor_top = -0.03
+anchor_right = 0.466
+offset_left = -160.48
+offset_top = 102.6
+offset_right = 185.52
+offset_bottom = 354.0
+grow_horizontal = 2
+text = "IRØ"
+label_settings = SubResource("LabelSettings_su865")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = 349.0
+offset_right = 128.0
+offset_bottom = -161.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1, 20)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Bosses"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"

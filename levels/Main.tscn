@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cv7c7jw3g37iy"]
+[gd_scene load_steps=20 format=3 uid="uid://cv7c7jw3g37iy"]
 
 [ext_resource type="PackedScene" uid="uid://cmljcpcyimrfu" path="res://player/Player.tscn" id="1_s5j47"]
 [ext_resource type="PackedScene" uid="uid://dicvokuwuqkk3" path="res://Boss/Boss.tscn" id="2_h11cf"]
@@ -8,41 +8,45 @@
 [ext_resource type="Texture2D" uid="uid://djvxdjpd7ggaq" path="res://assets/button_pressed.tres" id="5_3vw7n"]
 [ext_resource type="Texture2D" uid="uid://bbuvg7m4h3syw" path="res://assets/button_stick.tres" id="5_bvijt"]
 [ext_resource type="Script" uid="uid://cvrceu2wa8gyk" path="res://UI/VirtualStick.gd" id="6_vmibe"]
+[ext_resource type="AudioStream" uid="uid://tyy5x7r1ex60" path="res://music/inferno.ogg" id="9_3mabw"]
 
-[sub_resource type="Gradient" id="Gradient_vmibe"]
+[sub_resource type="Gradient" id="Gradient_3mabw"]
 offsets = PackedFloat32Array(0.485915)
 colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bvijt"]
-gradient = SubResource("Gradient_vmibe")
+gradient = SubResource("Gradient_3mabw")
 fill_from = Vector2(1, 0)
 
-[sub_resource type="Gradient" id="Gradient_2jfjj"]
+[sub_resource type="Gradient" id="Gradient_3pm0d"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ntnxr"]
-gradient = SubResource("Gradient_2jfjj")
+gradient = SubResource("Gradient_3pm0d")
 fill_from = Vector2(0.975728, 0.0194175)
 
-[sub_resource type="Gradient" id="Gradient_3vw7n"]
+[sub_resource type="Gradient" id="Gradient_ko617"]
 offsets = PackedFloat32Array(0.672794, 0.676471, 0.6875, 0.702206)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vmibe"]
-gradient = SubResource("Gradient_3vw7n")
+gradient = SubResource("Gradient_ko617")
 width = 200
 height = 200
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3vw7n"]
-radius = 61.2
+radius = 74.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vmibe"]
-radius = 61.2
+radius = 74.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_bvijt"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_3mabw"]
 font_size = 64
 
 [node name="Node2D" type="Node2D"]
@@ -266,6 +270,24 @@ text = "Hello, World
 "
 label_settings = SubResource("LabelSettings_bvijt")
 
+[node name="FPS" type="Label" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = 304.0
+offset_right = -1052.0
+offset_bottom = -331.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_3mabw")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-4, 6)
 script = ExtResource("4_ntnxr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_3mabw")
+volume_db = -10.4
+autoplay = true
+parameters/looping = false

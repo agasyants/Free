@@ -15,15 +15,15 @@ enum PlayerState {
 }
 
 const PlayerStateNames = {
-	PlayerState.IDLE: "Idle",
-	PlayerState.SHOOT: "Shoot",
-	PlayerState.CHARGING_DASH: "Charging Dash",
-	PlayerState.DASH: "Dash",
-	PlayerState.CHARGING_DASH_AND_ATTACK: "Charging Dash & Attack",
-	PlayerState.CHARGING_ATTACK_AND_DASHING: "Charging Attack & Dashing",
-	PlayerState.CHARGING_ATTACK: "Charging Attack",
-	PlayerState.ATTACK: "Attack",
-	PlayerState.PARRY: "Parry"
+	PlayerState.IDLE: "IDLE",
+	PlayerState.SHOOT: "SHOOT",
+	PlayerState.CHARGING_DASH: "CHARGING_DASH",
+	PlayerState.DASH: "DASH",
+	PlayerState.CHARGING_DASH_AND_ATTACK: "CHARGING_DASH_AND_ATTACK",
+	PlayerState.CHARGING_ATTACK_AND_DASHING: "CHARGING_ATTACK_AND_DASHING",
+	PlayerState.CHARGING_ATTACK: "CHARGING_ATTACK",
+	PlayerState.ATTACK: "ATTACK",
+	PlayerState.PARRY: "PARRY"
 }
 
 var state_speeds = {

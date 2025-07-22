@@ -12,7 +12,7 @@ var aspect_correction := Vector2.ONE
 
 func _ready():
 	player = get_tree().get_nodes_in_group("player").front()
-	boss = get_tree().get_nodes_in_group("enemies").front()
+	boss = get_tree().get_nodes_in_group("enemies").front() if get_tree().has_group("enemies") else null
 
 func _process(delta):
 	if player == null:

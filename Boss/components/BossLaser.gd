@@ -63,19 +63,21 @@ func _draw() -> void:
 
 		# Colors
 		var color = laser.color
-		draw_line(from, to, color, main_width)
-		draw_line(from, to, Color(1, 1, 1, 1), white_core_width)
+		draw_line(from, to, color, main_width, Settings.is_aa())
+		draw_line(from, to, Color(1, 1, 1, 1), white_core_width, Settings.is_aa())
 
-		# Energy particles
-		var particle_count = 8
-		for i in range(particle_count):
-			var phase = float(i) / particle_count + time
-			var particle_t = fmod(phase, 1.0)
-			var pos = from.lerp(to, particle_t)
-			var particle_offset = sin(time * 10.0 + i) * 5.0
-			var particle_pos = pos + perp * particle_offset
-			var size = 2.0 + sin(time * 20.0 + i) * 1.5
-			draw_circle(particle_pos, size, Color(1, 1, 1, 1))
+		
+		if Settings.is_trails():
+			# Energy particles
+			var particle_count = 8
+			for i in range(particle_count):
+				var phase = float(i) / particle_count + time
+				var particle_t = fmod(phase, 1.0)
+				var pos = from.lerp(to, particle_t)
+				var particle_offset = sin(time * 10.0 + i) * 5.0
+				var particle_pos = pos + perp * particle_offset
+				var size = 2.0 + sin(time * 20.0 + i) * 1.5
+				draw_circle(particle_pos, size, Color(1, 1, 1, 1), true, -1, Settings.is_aa())
 
 
 # ======== УТИЛИТЫ ДЛЯ ACTION'ОВ ========

@@ -24,7 +24,7 @@ func _get_radius(time: float) -> float:
 
 func render(canvas: CanvasItem) -> void:
 	var r = _get_radius(timer)
-	canvas.draw_circle(center, r, color)
+	canvas.draw_circle(center, r, color, true, -1, Settings.is_aa())
 
 func is_inside(point: Vector2, radius: float = 0.0) -> bool:
 	var r = _get_radius(timer)

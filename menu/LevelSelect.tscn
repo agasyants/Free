@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://b83jdhaovchva"]
+
+[ext_resource type="Script" uid="uid://banr6r0b4l53e" path="res://menu/LevelSelect.gd" id="1_43lik"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_43lik"]
+font_size = 128
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_43lik")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 10.0
+offset_bottom = 730.0
+grow_horizontal = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 410.0
+offset_top = 53.0
+offset_right = -447.0
+offset_bottom = 228.0
+grow_horizontal = 2
+text = "Bosses"
+label_settings = SubResource("LabelSettings_43lik")
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 44.0
+offset_right = 156.0
+offset_bottom = 114.0
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 230.0
+offset_right = 995.0
+offset_bottom = 578.0
+columns = 3

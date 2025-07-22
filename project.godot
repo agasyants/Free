@@ -10,14 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Free"
-run/main_scene="uid://cv7c7jw3g37iy"
+config/name="IRO"
+run/main_scene="uid://rx3p2ragpv5j"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 types="*res://scripts/Types.gd"
+Settings="*res://scripts/Settings.gd"
 
 [display]
 
@@ -90,3 +91,4 @@ parry={
 
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_2d=2
