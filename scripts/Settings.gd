@@ -1,46 +1,92 @@
 extends Node
 
 var CONFIG = {
-	"quality_level": {
-		"label": "Quality Level",
-		"type": "option",
-		"options": ["low", "medium", "high"]
+	"graphics": {
+		"quality_level": {
+			"label": "Quality Level",
+			"type": "option",
+			"options": ["low", "medium", "high"]
+		},
+		"render_resolution": {
+			"label": "Resolution",
+			"type": "option",
+			"options": ["480p", "720p", "native"]
+		},
+		"bullet_draw_mode": {
+			"label": "Bullet Draw Mode",
+			"type": "option",
+			"options": ["normal", "minimal"]
+		},
+		"gpu_antialiasing": {
+			"label": "GPU Antialising",
+			"type": "option",
+			"options": ["off", "2x", "4x", "8x"]
+		},
+		"target_fps": {
+			"label": "FPS Cap",
+			"type": "option",
+			"options": ["30", "60", "100"],
+		},
+		"vsync_enabled": {
+			"label": "VSync",
+			"type": "checkbox"
+		},
+		"enable_trails": {
+			"label": "Enable Trails",
+			"type": "checkbox"
+		},
+		"cpu_antialiasing_enabled": {
+			"label": "Enable CPU Antialising",
+			"type": "checkbox"
+		},
 	},
-	"render_resolution": {
-		"label": "Resolution",
-		"type": "option",
-		"options": ["480p", "720p", "native"]
+	
+	"gameplay": {
+		#"difficulty": {
+			#"label": "Difficulty",
+			#"type": "option",
+			#"options": ["easy", "normal", "hard"]
+		#},
+		#"auto_aim": {
+			#"label": "Auto Aim",
+			#"type": "checkbox"
+		#},
+		#"camera_shake": {
+			#"label": "Camera Shake",
+			#"type": "checkbox"
+		#},
+		"diying": {
+			"label": "Can You Die",
+			"type": "checkbox"
+		}
 	},
-	"bullet_draw_mode": {
-		"label": "Bullet Draw Mode",
-		"type": "option",
-		"options": ["normal", "minimal"]
-	},
-	"gpu_antialiasing": {
-		"label": "GPU Antialising",
-		"type": "option",
-		"options": ["off", "2x", "4x", "8x"]
-	},
-	"target_fps": {
-		"label": "FPS Cap",
-		"type": "option",
-		"options": ["30", "60", "100"],
-	},
-	"vsync_enabled": {
-		"label": "VSync",
-		"type": "checkbox"
-	},
-	"enable_trails": {
-		"label": "Enable Trails",
-		"type": "checkbox"
-	},
-	"cpu_antialiasing_enabled": {
-		"label": "Enable CPU Antialising",
-		"type": "checkbox"
-	},
+	
+	"controls": {
+		#"keyboard_layout": {
+			#"label": "Keyboard Layout",
+			#"type": "option",
+			#"options": ["QWERTY", "AZERTY", "DVORAK"]
+		#},
+		#"mouse_sensitivity": {
+			#"label": "Mouse Sensitivity",
+			#"type": "range",
+			#"min": 0.1,
+			#"max": 5.0,
+			#"step": 0.1
+		#},
+		#"invert_y_axis": {
+			#"label": "Invert Y Axis",
+			#"type": "checkbox"
+		#},
+		"vibration": {
+			"label": "Controller Vibration",
+			"type": "checkbox"
+		}
+	}
 }
 
 const DEFAULTS = {
+	# Graphics
 	"quality_level": "medium",
 	"render_resolution": "native",
 	"enable_trails": true,
@@ -48,7 +94,19 @@ const DEFAULTS = {
 	"target_fps": "60",
 	"vsync_enabled": true,
 	"cpu_antialiasing_enabled": true,
-	"gpu_antialiasing": "2x"
+	"gpu_antialiasing": "2x",
+	
+	# Gameplay
+	#"difficulty": "normal",
+	#"auto_aim": false,
+	#"camera_shake": true,
+	"diying": true,
+	
+	# Controls
+	#"keyboard_layout": "QWERTY",
+	#"mouse_sensitivity": 1.0,
+	#"invert_y_axis": false,
+	"vibration": true
 }
 
 var settings = DEFAULTS.duplicate(true)
@@ -79,6 +137,12 @@ func save_settings():
 func apply_settings():
 	if not _loaded:
 		return
+	
+	apply_graphics_settings()
+	apply_gameplay_settings()
+	apply_controls_settings()
+	
+func apply_graphics_settings():
 	# FPS cap
 	print(int(settings["target_fps"]))
 	Engine.max_fps = int(settings["target_fps"])
@@ -142,3 +206,15 @@ func set_msaa_level(level: int):
 	]
 	if level >= 0 and level < msaa_modes.size():
 		RenderingServer.viewport_set_msaa_2d(get_tree().get_root().get_viewport_rid(), msaa_modes[level])
+
+func apply_gameplay_settings():
+	pass  # Здесь будет логика применения игровых настроек
+
+func apply_controls_settings():
+	pass  # Здесь будет логика применения настроек управления
+
+func can_die():
+	return settings["diying"]
+
+func shake():
+	return settings["vibration"]

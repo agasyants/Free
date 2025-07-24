@@ -1,0 +1,292 @@
+[gd_scene load_steps=21 format=3 uid="uid://colpl7nekbun5"]
+
+[ext_resource type="Script" uid="uid://dp5yfvb77d3u5" path="res://Boss/BossHPBar.gd" id="1_r3wg6"]
+[ext_resource type="Script" uid="uid://cvrceu2wa8gyk" path="res://UI/VirtualStick.gd" id="2_lxxjw"]
+[ext_resource type="Texture2D" uid="uid://bbuvg7m4h3syw" path="res://assets/button_stick.tres" id="3_ykr1e"]
+[ext_resource type="Texture2D" uid="uid://cdhypmj2epfyh" path="res://assets/button.tres" id="4_33dgs"]
+[ext_resource type="Texture2D" uid="uid://djvxdjpd7ggaq" path="res://assets/button_pressed.tres" id="5_t1o8s"]
+[ext_resource type="PackedScene" uid="uid://d13l08ft4wmkf" path="res://UI/Pause.tscn" id="6_lxxjw"]
+[ext_resource type="PackedScene" uid="uid://b6q55x0odhk4y" path="res://UI/Death.tscn" id="7_ykr1e"]
+
+[sub_resource type="Gradient" id="Gradient_3mabw"]
+offsets = PackedFloat32Array(0.485915)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bvijt"]
+gradient = SubResource("Gradient_3mabw")
+fill_from = Vector2(1, 0)
+
+[sub_resource type="Gradient" id="Gradient_3pm0d"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ntnxr"]
+gradient = SubResource("Gradient_3pm0d")
+fill_from = Vector2(0.975728, 0.0194175)
+
+[sub_resource type="Gradient" id="Gradient_ko617"]
+offsets = PackedFloat32Array(0.672794, 0.676471, 0.6875, 0.702206)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vmibe"]
+gradient = SubResource("Gradient_ko617")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vw7n"]
+radius = 74.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmibe"]
+radius = 74.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvijt"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_3mabw"]
+font_size = 64
+
+[sub_resource type="Gradient" id="Gradient_r3wg6"]
+offsets = PackedFloat32Array(0.677419, 0.697581)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lxxjw"]
+gradient = SubResource("Gradient_r3wg6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ykr1e"]
+radius = 37.14
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="BossHealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 33.0
+grow_horizontal = 0
+script = ExtResource("1_r3wg6")
+
+[node name="FrontHealthBar" type="TextureProgressBar" parent="BossHealthBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -486.0
+offset_top = 28.0
+offset_right = -36.0
+offset_bottom = 58.0
+grow_horizontal = 0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_bvijt")
+
+[node name="BackHealthBar" type="TextureProgressBar" parent="BossHealthBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -486.0
+offset_top = 28.0
+offset_right = -36.0
+offset_bottom = 58.0
+grow_horizontal = 0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_ntnxr")
+texture_progress = SubResource("GradientTexture2D_bvijt")
+
+[node name="PlayerHealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_r3wg6")
+
+[node name="FrontHealthBar" type="TextureProgressBar" parent="PlayerHealthBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -13.0
+offset_top = 28.0
+offset_right = 437.0
+offset_bottom = 58.0
+grow_horizontal = 0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_bvijt")
+
+[node name="BackHealthBar" type="TextureProgressBar" parent="PlayerHealthBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -15.0
+offset_top = 28.0
+offset_right = 435.0
+offset_bottom = 58.0
+grow_horizontal = 0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_ntnxr")
+texture_progress = SubResource("GradientTexture2D_bvijt")
+
+[node name="LeftStick" type="Control" parent="."]
+z_index = 15
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -720.0
+offset_right = 200.0
+grow_vertical = 0
+script = ExtResource("2_lxxjw")
+
+[node name="Base" type="TextureRect" parent="LeftStick"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = -271.0
+offset_right = 278.0
+offset_bottom = -71.0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_vmibe")
+
+[node name="Stick" type="TextureRect" parent="LeftStick"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 137.0
+offset_top = -211.0
+offset_right = 217.0
+offset_bottom = -131.0
+grow_vertical = 0
+texture = ExtResource("3_ykr1e")
+
+[node name="RightStick" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("2_lxxjw")
+
+[node name="Base" type="TextureRect" parent="RightStick"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = -432.0
+offset_right = -152.0
+offset_bottom = -232.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_vmibe")
+
+[node name="Stick" type="TextureRect" parent="RightStick"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -291.0
+offset_top = -374.0
+offset_right = -211.0
+offset_bottom = -294.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_ykr1e")
+
+[node name="Buttons" type="Control" parent="."]
+z_index = 7
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -395.0
+offset_top = -241.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="DashButton" type="TouchScreenButton" parent="Buttons"]
+z_index = 10
+position = Vector2(117, 109)
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("4_33dgs")
+texture_pressed = ExtResource("5_t1o8s")
+shape = SubResource("CircleShape2D_3vw7n")
+action = "dash"
+visibility_mode = 1
+
+[node name="AttackButton" type="TouchScreenButton" parent="Buttons"]
+z_index = 9
+position = Vector2(-13, 32)
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("4_33dgs")
+texture_pressed = ExtResource("5_t1o8s")
+shape = SubResource("CircleShape2D_3vw7n")
+action = "attack"
+visibility_mode = 1
+
+[node name="ParryButton" type="TouchScreenButton" parent="Buttons"]
+z_index = 8
+position = Vector2(221, -3)
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("4_33dgs")
+texture_pressed = ExtResource("5_t1o8s")
+shape = SubResource("CircleShape2D_vmibe")
+action = "parry"
+visibility_mode = 1
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 133.0
+offset_top = 188.0
+offset_right = 738.0
+offset_bottom = 447.0
+text = "Hello, World
+"
+label_settings = SubResource("LabelSettings_bvijt")
+
+[node name="FPS" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = 304.0
+offset_right = -1052.0
+offset_bottom = -331.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_3mabw")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(594, 20)
+texture_normal = SubResource("GradientTexture2D_lxxjw")
+shape = SubResource("CircleShape2D_ykr1e")
+action = "pause"
+visibility_mode = 1
+
+[node name="Pause" parent="." instance=ExtResource("6_lxxjw")]
+visible = false
+
+[node name="Death" parent="." instance=ExtResource("7_ykr1e")]
+visible = false

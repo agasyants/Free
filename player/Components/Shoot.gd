@@ -5,7 +5,6 @@ class_name ShootingComponent
 
 signal bullet_fired(bullet_position: Vector2, bullet_direction: Vector2)
 
-@export var bullet_scene: PackedScene
 @export var shoot_cooldown: float = 0.16
 
 var shoot_cooldown_timer: float = 0.0
@@ -14,6 +13,7 @@ var shoot_cooldown_timer: float = 0.0
 @onready var body: CharacterBody2D = get_parent().get_parent()
 @onready var muzzle: Marker2D = body.get_node("Muzzle")
 @onready var aim_stick: VirtualStick = get_node("/root/Node2D/CanvasLayer/RightStick")
+@onready var bullet_manager: BulletManager = get_node("/root/Node2D/BulletManager")
 
 func _ready():
 	validate_components()
@@ -22,9 +22,6 @@ func validate_components() -> void:
 	"""Проверяет наличие всех необходимых компонентов"""
 	if not body.has_node("Muzzle"):
 		push_error("Muzzle node отсутствует! Добавьте Marker2D с именем 'Muzzle'")
-	
-	if bullet_scene == null:
-		push_warning("bullet_scene не назначен. Установите его в инспекторе.")
 
 func handle(delta: float) -> void:
 	"""Основной метод обработки стрельбы"""
@@ -64,23 +61,18 @@ func start_cooldown() -> void:
 	shoot_cooldown_timer = shoot_cooldown
 
 func create_bullet(position: Vector2, direction: Vector2) -> void:
-	"""Создает и настраивает пулю"""
-	if bullet_scene == null:
-		print("⚠ bullet_scene не назначен в инспекторе!")
-		return
-	
-	var bullet = bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet)
-	bullet.global_position = position
-	
-	set_bullet_direction(bullet, direction)
-
-func set_bullet_direction(bullet: Bullet, direction: Vector2) -> void:
-	"""Устанавливает направление пули используя доступные методы"""
-	if bullet.has_method("setup"):
-		bullet.setup(direction)
-	else:
-		push_warning("Пуля не имеет метода set_direction или свойства direction")
+	bullet_manager.spawn_bullet({
+		"position": position,
+		"velocity": direction,
+		"speed": 600.0,
+		"damage": 2,
+		"health": 1,
+		"radius": 6.0,
+		"lifetime": 8.0,
+		"is_player": true,
+		"logic_id": "default",
+		"renderer_id": "default"
+	})
 
 func get_shoot_direction() -> Vector2:
 	"""Возвращает направление стрельбы (к позиции мыши или из стика)"""	
@@ -92,7 +84,7 @@ func get_shoot_direction() -> Vector2:
 
 func can_shoot() -> bool:
 	"""Проверяет, может ли игрок стрелять"""
-	return shoot_cooldown_timer <= 0.0 and bullet_scene != null and !body.dash_component.is_dashing() and !body.dash_component.is_charging() and body.state != types.PlayerState.CHARGING_ATTACK and body.state != types.PlayerState.ATTACK and body.state != types.PlayerState.PARRY
+	return shoot_cooldown_timer <= 0.0 and !body.dash_component.is_dashing() and !body.dash_component.is_charging() and body.state != types.PlayerState.CHARGING_ATTACK and body.state != types.PlayerState.ATTACK and body.state != types.PlayerState.PARRY
 
 func get_shoot_cooldown_progress() -> float:
 	"""Возвращает прогресс кулдауна стрельбы (0.0 - 1.0)"""

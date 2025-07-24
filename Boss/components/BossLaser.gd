@@ -4,6 +4,7 @@ class_name BossLaserComponent
 var current_lasers: Array = []
 var boss: Boss
 var player: Node2D
+@onready var camera: Camera = get_viewport().get_camera_2d()
 
 func _ready():
 	boss = get_parent().get_parent() as Boss
@@ -11,9 +12,6 @@ func _ready():
 
 func fire_lasers(lasers_array: Array):
 	current_lasers.clear()
-
-	var viewport_rect = get_viewport().get_visible_rect()
-	var max_distance = max(viewport_rect.size.x, viewport_rect.size.y) * 2.0
 	var space_state = get_world_2d().direct_space_state
 
 	for laser in lasers_array:
@@ -23,7 +21,7 @@ func fire_lasers(lasers_array: Array):
 		var color: Color = laser.get("color", Color.RED)
 		var width: float = laser.get("width", 3.0)
 
-		var to = from + dir * max_distance
+		var to = camera.get_laser_clipped_point_optimized(from, dir)
 
 		# Создаём параметр raycast-запроса
 		var query = PhysicsRayQueryParameters2D.create(from, to)

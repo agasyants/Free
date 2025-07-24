@@ -8,15 +8,18 @@ class_name Boss
 @onready var health: BossHealthComponent = components.get_node("BossHealthComponent")
 @onready var laser: BossLaserComponent = components.get_node("BossLaserComponent")
 @onready var wave: BossWaveComponent = components.get_node("BossWaveComponent")
+@onready var bound: BoundaryComponent = components.get_node("BossBoundaryComponent")
 
 var phase: BossPhase
 var current_phase_index := 0
+var radius: float = 24
 
 # Список фаз по порядку
 var phases := [
 	RandomPhase,
-	AggressiveClosePhase,
-	SniperReactivePhase
+	#AggressiveClosePhase,
+	SniperReactivePhase,
+	FinalPhase
 ]
 
 func _ready():
@@ -27,6 +30,7 @@ func _process(delta):
 	wave.update(delta)
 	if phase:
 		phase.update(delta)
+	#bound.clamp_to_screen()
 		
 func take_damage(damage: int):
 	health.take_damage(damage)

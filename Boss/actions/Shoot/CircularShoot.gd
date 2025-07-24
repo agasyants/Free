@@ -24,7 +24,7 @@ func update(delta: float):
 	if shoot_timer >= shoot_interval:
 		shoot_timer = 0.0
 		var dir = boss.shoot.get_direction_to_player()
-		boss.shoot.shoot(boss.global_position, dir)
+		boss.shoot.shoot(boss.global_position, dir, 'fast')
 
 	boss.movement.update(delta)
 	#boss.shoot.update(delta)

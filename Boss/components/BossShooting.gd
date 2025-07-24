@@ -1,9 +1,7 @@
 extends Node
 class_name BossShootComponent
 
-@export var default_bullet_scene: PackedScene
-@export var fast_bullet_scene: PackedScene
-@export var heavy_bullet_scene: PackedScene
+@onready var bullet_manager: BulletManager = get_node("/root/Node2D/BulletManager")
 
 var boss: CharacterBody2D
 
@@ -12,29 +10,49 @@ func _ready():
 
 # Запустить пулю
 func shoot(origin: Vector2, direction: Vector2, bullet_type: String = "default"):
-	var bullet_scene = get_bullet(bullet_type)
-	if bullet_scene == null:
-		push_warning("Пуля типа '%s' не задана" % bullet_type)
-		return
-
-	var bullet = bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet)
-
-	bullet.global_position = origin
-	if bullet.has_method("setup"):
-		bullet.setup(direction.normalized())
-
-# Вернуть нужный тип пули
-func get_bullet(bullet_type: String) -> PackedScene:
 	match bullet_type:
 		"default":
-			return default_bullet_scene
+			bullet_manager.spawn_bullet({
+				"position": origin,
+				"velocity": direction,
+				"speed": 500.0,
+				"damage": 5,
+				"health": 2,
+				"radius": 14.0,
+				"lifetime": 8.0,
+				"is_player": false,
+				"logic_id": "default",
+				"renderer_id": "red"
+			})
 		"fast":
-			return fast_bullet_scene
+			bullet_manager.spawn_bullet({
+				"position": origin,
+				"velocity": direction,
+				"speed": 1000.0,
+				"damage": 1,
+				"health": 1,
+				"radius": 6.0,
+				"lifetime": 3.0,
+				"is_player": false,
+				"logic_id": "homing",
+				"renderer_id": "red"
+			})
 		"heavy":
-			return heavy_bullet_scene
+			bullet_manager.spawn_bullet({
+				"position": origin,
+				"velocity": direction,
+				"speed": 800.0,
+				"damage": 20,
+				"health": 6,
+				"radius": 20.0,
+				"lifetime": 30.0,
+				"is_player": false,
+				"logic_id": "homing",
+				"renderer_id": "homing"
+			})
 		_:
 			return null
+		
 
 # Направление до игрока
 func get_direction_to_player() -> Vector2:

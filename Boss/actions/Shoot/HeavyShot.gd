@@ -1,7 +1,7 @@
 extends BossAction
 class_name HeavySnipeAction
 
-var aim_time := 0.7
+var aim_time := 1.0
 var fired := false
 
 func update(delta: float):

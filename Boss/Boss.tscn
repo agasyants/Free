@@ -1,12 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dicvokuwuqkk3"]
+[gd_scene load_steps=11 format=3 uid="uid://dicvokuwuqkk3"]
 
 [ext_resource type="Script" uid="uid://dqyfbarv35cmx" path="res://Boss/Boss.gd" id="1_sbnmg"]
 [ext_resource type="Script" uid="uid://vhcfmbm21o3d" path="res://Boss/components/BossMovement.gd" id="2_sdoex"]
 [ext_resource type="Script" uid="uid://crfiufq67eof7" path="res://Boss/components/BossShooting.gd" id="3_onhe5"]
-[ext_resource type="PackedScene" uid="uid://dgxwxts1h0p4k" path="res://Boss/BossBullet.tscn" id="4_l78yc"]
 [ext_resource type="Script" uid="uid://7qk54t66fmrl" path="res://Boss/components/BossHealth.gd" id="4_onhe5"]
-[ext_resource type="PackedScene" uid="uid://dxw2oi8gj2boo" path="res://Bullets/HomingBullet.tscn" id="5_0rlmi"]
 [ext_resource type="Script" uid="uid://ceyu434inj5hb" path="res://Boss/components/BossLaser.gd" id="7_7ck7k"]
+[ext_resource type="Script" uid="uid://2hlonibn60ew" path="res://player/Components/Boundary.gd" id="7_yhums"]
 [ext_resource type="Script" uid="uid://uskxlv85ywp5" path="res://Boss/components/BossWave.gd" id="8_yhums"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yhums"]
@@ -23,19 +22,15 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Boss1" type="CharacterBody2D"]
 z_index = 1
-collision_layer = 8
-collision_mask = 2
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_sbnmg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0.5)
 shape = SubResource("CircleShape2D_yhums")
 debug_color = Color(0.836953, 0.366634, 0.994606, 0.42)
 
-[node name="Boss" type="Node2D" parent="."]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.499997, 0.499997)
 texture = SubResource("GradientTexture2D_4xi7c")
 
 [node name="Components" type="Node" parent="."]
@@ -45,9 +40,6 @@ script = ExtResource("2_sdoex")
 
 [node name="BossShootingComponent" type="Node" parent="Components"]
 script = ExtResource("3_onhe5")
-default_bullet_scene = ExtResource("4_l78yc")
-fast_bullet_scene = ExtResource("4_l78yc")
-heavy_bullet_scene = ExtResource("5_0rlmi")
 
 [node name="BossHealthComponent" type="Node" parent="Components"]
 script = ExtResource("4_onhe5")
@@ -58,5 +50,8 @@ script = ExtResource("7_7ck7k")
 [node name="BossWaveComponent" type="Node2D" parent="Components"]
 script = ExtResource("8_yhums")
 
+[node name="BossBoundaryComponent" type="Node" parent="Components"]
+script = ExtResource("7_yhums")
+
 [node name="ShootPoint" type="Node2D" parent="."]
-position = Vector2(50, 0)
+position = Vector2(37, 0)
