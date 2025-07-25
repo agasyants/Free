@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://colpl7nekbun5"]
+[gd_scene load_steps=23 format=3 uid="uid://colpl7nekbun5"]
 
 [ext_resource type="Script" uid="uid://dp5yfvb77d3u5" path="res://Boss/BossHPBar.gd" id="1_r3wg6"]
 [ext_resource type="Script" uid="uid://cvrceu2wa8gyk" path="res://UI/VirtualStick.gd" id="2_lxxjw"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://djvxdjpd7ggaq" path="res://assets/button_pressed.tres" id="5_t1o8s"]
 [ext_resource type="PackedScene" uid="uid://d13l08ft4wmkf" path="res://UI/Pause.tscn" id="6_lxxjw"]
 [ext_resource type="PackedScene" uid="uid://b6q55x0odhk4y" path="res://UI/Death.tscn" id="7_ykr1e"]
+[ext_resource type="Script" uid="uid://38wh2kubxmqn" path="res://UI/BossPhaseUI.gd" id="8_33dgs"]
+[ext_resource type="Script" uid="uid://cq7h08rjtigqh" path="res://UI/PlayerLivesUI.gd" id="9_t1o8s"]
 
 [sub_resource type="Gradient" id="Gradient_3mabw"]
 offsets = PackedFloat32Array(0.485915)
@@ -48,8 +50,8 @@ font_size = 64
 font_size = 64
 
 [sub_resource type="Gradient" id="Gradient_r3wg6"]
-offsets = PackedFloat32Array(0.677419, 0.697581)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+offsets = PackedFloat32Array(0.58871, 0.677419, 0.697581)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lxxjw"]
 gradient = SubResource("Gradient_r3wg6")
@@ -278,12 +280,57 @@ grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_3mabw")
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
-position = Vector2(594, 20)
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = -600.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
+position = Vector2(614, 17)
 texture_normal = SubResource("GradientTexture2D_lxxjw")
 shape = SubResource("CircleShape2D_ykr1e")
 action = "pause"
 visibility_mode = 1
+
+[node name="BossPhaseUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("8_33dgs")
+
+[node name="PhaseContainer" type="HBoxContainer" parent="BossPhaseUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 63.0
+offset_right = -34.0
+offset_bottom = 93.0
+grow_horizontal = 0
+
+[node name="PlayerLivesUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_t1o8s")
+
+[node name="LifeContainer" type="HBoxContainer" parent="PlayerLivesUI"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 71.0
+offset_right = 199.0
+offset_bottom = 109.0
 
 [node name="Pause" parent="." instance=ExtResource("6_lxxjw")]
 visible = false

@@ -3,6 +3,7 @@ class_name Player
 
 var state: types.PlayerState = types.PlayerState.IDLE
 var radius: float = 22
+var is_active: bool = true
 
 # Компоненты
 @onready var components = $Components
@@ -18,21 +19,21 @@ var radius: float = 22
 @onready var fps = get_node("/root/Node2D/CanvasLayer/FPS")
 
 func _physics_process(delta):
-	# Обрабатываем все компоненты
-	movement_component.handle(delta)
-	shooting_component.handle(delta)
-	dash_component.handle(delta)
+	if is_active:
+		# Обрабатываем все компоненты
+		movement_component.handle(delta)
+		shooting_component.handle(delta)
+		dash_component.handle(delta)
+		attack_component.handle(delta)
+		parry_component.handle(delta)
+		#print(state)
+		label.text = types.PlayerStateNames[state]
+		fps.text = str(Engine.get_frames_per_second())
+		# Применяем движение
+		move_and_slide()
+		# Ограничиваем границами экрана
+		#boundary_component.clamp_to_screen()
 	animation_component.handle(delta)
-	attack_component.handle(delta)
-	parry_component.handle(delta)
-	#print(state)
-	label.text = types.PlayerStateNames[state]
-	fps.text = str(Engine.get_frames_per_second())
-	# Применяем движение
-	move_and_slide()
-	
-	# Ограничиваем границами экрана
-	#boundary_component.clamp_to_screen()
 
 # Публичные методы для взаимодействия компонентов
 func get_current_velocity() -> Vector2:
@@ -58,3 +59,8 @@ func can_move() -> bool:
 
 func get_movement_direction() -> Vector2:
 	return movement_component.get_last_direction()
+
+func set_active(a: bool):
+	is_active = a
+	if !a:
+		set_state(Types.PlayerState.IDLE)

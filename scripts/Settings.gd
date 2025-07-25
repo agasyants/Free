@@ -2,21 +2,21 @@ extends Node
 
 var CONFIG = {
 	"graphics": {
-		"quality_level": {
-			"label": "Quality Level",
-			"type": "option",
-			"options": ["low", "medium", "high"]
-		},
+		#"quality_level": {
+			#"label": "Quality Level",
+			#"type": "option",
+			#"options": ["low", "medium", "high"]
+		#},
 		"render_resolution": {
 			"label": "Resolution",
 			"type": "option",
 			"options": ["480p", "720p", "native"]
 		},
-		"bullet_draw_mode": {
-			"label": "Bullet Draw Mode",
-			"type": "option",
-			"options": ["normal", "minimal"]
-		},
+		#"bullet_draw_mode": {
+			#"label": "Bullet Draw Mode",
+			#"type": "option",
+			#"options": ["normal", "minimal"]
+		#},
 		"gpu_antialiasing": {
 			"label": "GPU Antialising",
 			"type": "option",
@@ -87,13 +87,13 @@ var CONFIG = {
 
 const DEFAULTS = {
 	# Graphics
-	"quality_level": "medium",
+	#"quality_level": "medium",
 	"render_resolution": "native",
 	"enable_trails": true,
-	"bullet_draw_mode": "normal",
+	#"bullet_draw_mode": "normal",
 	"target_fps": "60",
 	"vsync_enabled": true,
-	"cpu_antialiasing_enabled": true,
+	"cpu_antialiasing_enabled": false,
 	"gpu_antialiasing": "2x",
 	
 	# Gameplay

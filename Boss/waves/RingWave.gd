@@ -64,6 +64,9 @@ func render(canvas: CanvasItem) -> void:
 	canvas.draw_arc(center, outer, 0, TAU, RENDER_STEPS, 
 		Color(color.r, color.g, color.b, pulse * 0.8), pulse_thickness, Settings.is_aa())
 	
+	#canvas.draw_circle(center, inner, Color(0, 0, 0, 1), false, 5, Settings.is_aa())
+	#canvas.draw_circle(center, outer, Color(0, 0, 0, 1), false, 5, Settings.is_aa())
+	
 	# Свечение краев
 	var glow_width = 3.0 * (1.0 - progress)
 	canvas.draw_arc(center, outer, 0, TAU, RENDER_STEPS, 

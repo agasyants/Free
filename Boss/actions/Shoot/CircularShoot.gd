@@ -1,10 +1,10 @@
 extends BossAction
 class_name CircleAndShootAction
 
-var duration := 2.0
-var shoot_interval := 0.5
+var duration := 0.8
+var shoot_interval := 0.1
 var shoot_timer := 0.0
-var radius := 150.0
+var radius := 180.0
 var angular_speed := 2.0
 var center: Vector2
 

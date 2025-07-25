@@ -22,7 +22,6 @@ func start():
 		add_transition(action_type, func(prev):
 			return _random_action(prev)
 	)
-
 	super.start()
 
 func _random_action(prev: BossAction) -> BossAction:

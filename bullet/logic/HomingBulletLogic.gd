@@ -8,7 +8,7 @@ class_name HomingBulletLogic
 
 func update(bullet: BulletData, delta: float) -> void:
 	var desired_dir
-	if bullet.is_player:
+	if bullet.is_player and bullet.boss:
 		desired_dir = (bullet.boss.global_position - bullet.position).normalized()
 	else:
 		desired_dir = (bullet.player.global_position - bullet.position).normalized()

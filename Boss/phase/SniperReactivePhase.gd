@@ -20,15 +20,32 @@ func start():
 
 	add_transition(CircleAndShootAction, func(_prev):
 		var chance = randf()
-
 		if chance < 0.4:
 			return HeavySnipeAction.new()
 		else:
-			return BackstepShotAction.new()
+			return DashAttackAction.new()
 	)
 
 	add_transition(DashAttackAction, func(_prev):
-		return BackstepShotAction.new()
+		var chance = randf()
+		if chance < 0.5:
+			return LaserSweepLeftAction.new()
+		else:
+			return LaserSweepRightAction.new()
+	)
+	add_transition(LaserSweepLeftAction, func(_prev):
+		var chance = randf()
+		if chance < 0.4:
+			return LaserSweepLeftAction.new()
+		else:
+			return BackstepShotAction.new()
+	)
+	add_transition(LaserSweepRightAction, func(_prev):
+		var chance = randf()
+		if chance < 0.5:
+			return HeavySnipeAction.new()
+		else:
+			return LaserSweepLeftAction.new()
 	)
 
 	super.start()

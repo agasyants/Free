@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cv7c7jw3g37iy"]
+[gd_scene load_steps=8 format=3 uid="uid://cv7c7jw3g37iy"]
 
 [ext_resource type="PackedScene" uid="uid://cmljcpcyimrfu" path="res://player/Player.tscn" id="1_s5j47"]
 [ext_resource type="PackedScene" uid="uid://dicvokuwuqkk3" path="res://Boss/Boss.tscn" id="2_h11cf"]
 [ext_resource type="PackedScene" uid="uid://colpl7nekbun5" path="res://UI/CanvasLayer.tscn" id="3_3vw7n"]
 [ext_resource type="Script" uid="uid://dpxgxcp7pkr5e" path="res://scripts/CameraController.gd" id="4_ntnxr"]
-[ext_resource type="AudioStream" uid="uid://tyy5x7r1ex60" path="res://music/inferno.ogg" id="9_3mabw"]
+[ext_resource type="AudioStream" uid="uid://dwjf1lqxtv1mq" path="res://music/red.ogg" id="5_3vw7n"]
+[ext_resource type="PackedScene" uid="uid://c62w14pjthypx" path="res://cutscenes/PhaseManager.tscn" id="7_vmibe"]
 [ext_resource type="Script" uid="uid://c4m3pap7e76mj" path="res://bullet/BulletManager.gd" id="10_3pm0d"]
 
 [node name="Node2D" type="Node2D"]
@@ -28,10 +29,13 @@ position = Vector2(564, 297)
 script = ExtResource("4_ntnxr")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_3mabw")
+stream = ExtResource("5_3vw7n")
 volume_db = -10.4
+autoplay = true
 parameters/looping = false
 
 [node name="BulletManager" type="Node2D" parent="."]
 z_index = 1000
 script = ExtResource("10_3pm0d")
+
+[node name="PhaseManager" parent="." instance=ExtResource("7_vmibe")]

@@ -22,26 +22,23 @@ color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 100.0
 offset_top = 75.0
-offset_right = -1057.0
-offset_bottom = -575.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 223.0
+offset_bottom = 145.0
 theme_override_font_sizes/font_size = 32
 text = "Back"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 338.0
+offset_left = -302.0
 offset_top = 88.0
-offset_right = -323.0
+offset_right = 317.0
 offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1

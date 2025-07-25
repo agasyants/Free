@@ -98,7 +98,7 @@ func handle(delta: float) -> void:
 		damage_timer -= delta
 		if damage_timer <= 0:
 			damaged = false
-			
+	
 	# Rotation
 	if target_direction != Vector2.ZERO:
 		var target_angle = target_direction.angle()

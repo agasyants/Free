@@ -132,3 +132,13 @@ func notify_bullet_entered(bullet: BulletData, other: BulletData) -> void:
 # Вызывать при отскоке от стены
 func notify_bullet_bounced(bullet: BulletData, wall_normal: Vector2) -> void:
 	bullet.logic.on_bounce(bullet, wall_normal)
+
+# Уничтожает все пули, возвращая их прокси в пул и очищая массив
+func destroy_all_bullets() -> void:
+	# Проходим по всем пулям в обратном порядке
+	for i in range(bullets.size() - 1, -1, -1):
+		var bullet := bullets[i]
+		# Возвращаем прокси в пул
+		_return_proxy_to_pool(bullet)
+	# Полностью очищаем массив пуль
+	bullets.clear()

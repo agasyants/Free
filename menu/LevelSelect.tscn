@@ -25,11 +25,12 @@ color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 410.0
+anchors_preset = -1
+anchor_left = 0.486
+anchor_right = 0.486
+offset_left = -212.08
 offset_top = 53.0
-offset_right = -447.0
+offset_right = 210.92
 offset_bottom = 228.0
 grow_horizontal = 2
 text = "Bosses"

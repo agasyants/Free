@@ -8,8 +8,8 @@ func draw_canvas(target: CanvasItem, bullet: BulletData) -> void:
 	var t = bullet.time
 	var pos = bullet.position
 		
-	var dark_red = Color("8b0000")
-	var glow_red = Color("f80010")
+	var dark_red = Color("#000000")
+	var glow_red = Color("FF0000")
 
 	# Контур с резкой пульсацией
 	var pulse = abs(sin(t * 5.0)) * 3.0

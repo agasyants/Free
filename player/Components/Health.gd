@@ -4,16 +4,21 @@ class_name HealthComponent
 ## Отвечает за здоровье, получение урона и i-фреймы (неуязвимость)
 
 # Настройки здоровья
-@export var max_health: int = 100
-@export var current_health: int = 100
+@export var max_health: float = 100
+@export var current_health: float = 100
+
+@export var max_extra_lives: int = 3
+@export var extra_lives: int = 3
 
 @export var invincibility_duration: float = 0.6
+@export var is_healing: bool = false
 
 signal health_changed(current_health: int, max_health: int)
 signal damage_taken(damage: int, remaining_health: int)
 signal health_depleted
 signal invincibility_started
 signal invincibility_ended
+signal player_knocked
 
 var is_invincible: bool = false
 var invincibility_timer: float = 0.0
@@ -31,14 +36,15 @@ func _ready():
 func _process(delta: float):
 	if is_invincible:
 		_handle_invincibility(delta)
+	if is_healing:
+		healing(delta)
 
-func take_damage(damage: int) -> bool:
+func take_damage(damage: float) -> bool:
 	"""Наносит урон персонажу. Возвращает true, если урон был нанесен"""
-	if is_invincible or damage <= 0 or body.state == types.PlayerState.DASH:
+	if is_invincible or damage <= 0 or body.state == types.PlayerState.DASH or is_healing:
 		return false
 	
-	#var old_health = current_health
-	current_health = max(0, current_health - damage)
+	current_health = max(0.0, current_health - damage)
 	
 	# Испускаем сигналы
 	health_changed.emit(current_health, max_health)
@@ -48,14 +54,23 @@ func take_damage(damage: int) -> bool:
 	_start_invincibility()
 	
 	# Проверяем, не умер ли персонаж
-	if current_health <= 0:
-		health_depleted.emit()
+	if current_health <= 0 and Settings.can_die():
+		extra_lives -= 1
+		if extra_lives <= 0:
+			health_depleted.emit()
+		else:
+			player_knocked.emit()
 		
 	Input.vibrate_handheld(200, 0.5)
-	
 	return true
 
-func heal(amount: int) -> void:
+func healing(delta: float) -> void:
+	var healing_rate: float = 20.0  # Скорость восстановления здоровья в единицах в секунду
+	current_health = clamp(current_health + healing_rate * delta, 0.0, max_health)
+	
+	health_changed.emit(current_health, max_health)
+
+func heal(amount: float) -> void:
 	"""Восстанавливает здоровье"""
 	if amount <= 0:
 		return
@@ -66,20 +81,20 @@ func heal(amount: int) -> void:
 	if current_health != old_health:
 		health_changed.emit(old_health, current_health)
 
-func set_health(new_health: int) -> void:
+func set_health(new_health: float) -> void:
 	"""Устанавливает здоровье напрямую"""
-	var old_health = current_health
 	current_health = clamp(new_health, 0, max_health)
 	
-	if current_health != old_health:
-		health_changed.emit(old_health, current_health)
-		
-		if current_health <= 0:
-			health_depleted.emit()
+	health_changed.emit(current_health, max_health)
+	if current_health <= 0:
+		health_depleted.emit()
 
-func set_max_health(new_max_health: int, heal_to_max: bool = false) -> void:
+func add_extra_lives(add: int):
+	extra_lives = clamp(extra_lives+add, 0, max_extra_lives)
+
+func set_max_health(new_max_health: float, heal_to_max: bool = false) -> void:
 	"""Изменяет максимальное здоровье"""
-	max_health = max(1, new_max_health)
+	max_health = max(1.0, new_max_health)
 	
 	if heal_to_max:
 		set_health(max_health)
@@ -107,8 +122,8 @@ func _start_invincibility() -> void:
 	invincibility_timer = invincibility_duration
 	
 	# Запускаем мигание через компонент анимации
-	if animation_component:
-		animation_component.start_blink(invincibility_duration)
+	#if body.animation_component:
+		#body.animation_component.start_blink(invincibility_duration)
 	
 	invincibility_started.emit()
 

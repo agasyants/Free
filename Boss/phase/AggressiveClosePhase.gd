@@ -15,20 +15,29 @@ func start():
 	)
 
 	add_transition(TripleSpreadShotAction, func(_prev):
-		return CircleAndShootAction.new()
+		var chance = randf()
+
+		if chance < 0.2:
+			return CircleAndShootAction.new()
+		else:
+			return DualLaserSweepAction.new()
 	)
 
 	add_transition(CircleAndShootAction, func(_prev):
 		var chance = randf()
 
-		if chance < 0.5:
-			return BackstepShotAction.new()
+		if chance < 0.7:
+			return ManyRingsWavesAction.new()
 		else:
 			return DashAttackAction.new()
 	)
 
-	add_transition(BackstepShotAction, func(_prev):
+	add_transition(ManyRingsWavesAction, func(_prev):
 		return DashAttackAction.new()
+	)
+	
+	add_transition(DualLaserSweepAction, func(_prev):
+		return TripleSpreadShotAction.new()
 	)
 
 	super.start()

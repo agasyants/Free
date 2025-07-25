@@ -9,11 +9,13 @@ func get_initial_action() -> BossAction:
 func start():
 	add_transition(HeavySnipeAction, func(_prev):
 		if snipe_counter < 5:
+			snipe_counter += 1
 			return HeavySnipeAction.new()
 		else:
+			snipe_counter = 0
 			return RingWaveAttackAction.new()
 	)
 	add_transition(RingWaveAttackAction, func(_prev):
-		return RingWaveAttackAction.new()
+		return HeavySnipeAction.new()
 	)
 	super.start()

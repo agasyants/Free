@@ -48,9 +48,6 @@ func _draw() -> void:
 	for laser in current_lasers:
 		var from = to_local(laser.from)
 		var to = to_local(laser.to)
-		var dir = to - from
-		var normal = dir.normalized()
-		var perp = Vector2(-normal.y, normal.x)
 
 		# Pulse animation
 		var pulse = sin(time * 15.0) * 0.1 + 1.0
@@ -64,19 +61,9 @@ func _draw() -> void:
 		draw_line(from, to, color, main_width, Settings.is_aa())
 		draw_line(from, to, Color(1, 1, 1, 1), white_core_width, Settings.is_aa())
 
-		
-		if Settings.is_trails():
-			# Energy particles
-			var particle_count = 8
-			for i in range(particle_count):
-				var phase = float(i) / particle_count + time
-				var particle_t = fmod(phase, 1.0)
-				var pos = from.lerp(to, particle_t)
-				var particle_offset = sin(time * 10.0 + i) * 5.0
-				var particle_pos = pos + perp * particle_offset
-				var size = 2.0 + sin(time * 20.0 + i) * 1.5
-				draw_circle(particle_pos, size, Color(1, 1, 1, 1), true, -1, Settings.is_aa())
-
+func clear_lasers():
+	current_lasers.clear()
+	queue_redraw()
 
 # ======== УТИЛИТЫ ДЛЯ ACTION'ОВ ========
 

@@ -10,9 +10,9 @@ func update(delta: float) -> void:
 		boss.wave.emit_wave(RingWave.new(
 			boss.global_position,
 			1000.0,  # максимальный радиус
-			Color(0.3, 0.7, 1.0, 0.6),
+			Color("#FFFF00"),
 			3.0,     # длительность
-			30,
+			20,
 			40
 		))
 	
@@ -21,9 +21,9 @@ func update(delta: float) -> void:
 		boss.wave.emit_wave(RingWave.new(
 			boss.global_position,
 			1000.0,  # максимальный радиус
-			Color(0.3, 0.7, 1.0, 0.6),
+			Color("#FFFF00"),
 			3.0,     # длительность
-			30,
+			20,
 			40
 		))
 		
@@ -32,9 +32,9 @@ func update(delta: float) -> void:
 		boss.wave.emit_wave(RingWave.new(
 			boss.global_position,
 			1000.0,  # максимальный радиус
-			Color(0.3, 0.7, 1.0, 0.6),
+			Color("#FFFF00"),
 			3.0,     # длительность
-			30,
+			20,
 			80
 		))
 	

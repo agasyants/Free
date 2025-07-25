@@ -29,14 +29,14 @@ func update(delta: float) -> void:
 				"from": boss.global_position,
 				"direction": aim_dir1,
 				"damage": 10.0,
-				"color": Color.ORANGE,
+				"color": Color.RED,
 				"width": 30.0
 			},
 			{
 				"from": boss.global_position,
 				"direction": aim_dir2,
 				"damage": 10.0,
-				"color": Color.CYAN,
+				"color": Color.RED,
 				"width": 30.0
 			}
 		])
