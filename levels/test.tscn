@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgbsu5qx0sw6y"]
+[gd_scene load_steps=6 format=3 uid="uid://cgbsu5qx0sw6y"]
 
 [ext_resource type="PackedScene" uid="uid://cmljcpcyimrfu" path="res://player/Player.tscn" id="1_72lju"]
 [ext_resource type="PackedScene" uid="uid://colpl7nekbun5" path="res://UI/CanvasLayer.tscn" id="4_r4e4k"]
+[ext_resource type="PackedScene" uid="uid://d2ngmw3qmo4xp" path="res://arena/Arena.tscn" id="5_pnvjf"]
 [ext_resource type="Script" uid="uid://dpxgxcp7pkr5e" path="res://scripts/CameraController.gd" id="7_qtvpr"]
 [ext_resource type="Script" uid="uid://c4m3pap7e76mj" path="res://bullet/BulletManager.gd" id="8_2grjb"]
 
@@ -10,16 +11,15 @@
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_72lju")]
 position = Vector2(338, 169)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1280.0
-offset_bottom = 720.0
-color = Color(0, 0, 0, 1)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(338, 168)
 script = ExtResource("7_qtvpr")
 
+[node name="CanvasLayer" parent="." instance=ExtResource("4_r4e4k")]
+
+[node name="Arena" parent="." instance=ExtResource("5_pnvjf")]
+z_as_relative = false
+position = Vector2(535, 324)
+
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("8_2grjb")
-
-[node name="CanvasLayer" parent="." instance=ExtResource("4_r4e4k")]

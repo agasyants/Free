@@ -26,6 +26,9 @@ func take_damage(damage: int):
 	damage_taken.emit(damage)
 	health_changed.emit(current_health, max_health)
 	
+	var camera: Camera = get_viewport().get_camera_2d()
+	camera.add_shake(1.5, 0.5, 0.01, Vector2.ZERO, false, true, 1.0)
+	
 	if current_health <= 0:
 		#die()
 		boss_died.emit()

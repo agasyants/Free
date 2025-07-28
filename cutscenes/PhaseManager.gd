@@ -18,12 +18,16 @@ var beat: float = 0.37974683544
 
 func _ready():
 	player = get_tree().get_nodes_in_group("player").front()
-	player.set_active(false)
 	player.health_component.player_knocked.connect(player_knocked)
 	boss = get_tree().get_nodes_in_group("enemies").front()
 	boss.boss_knocked.connect(boss_knocked)
 	hide_all()
-	start_intro()
+	if auto_start:
+		player.set_active(false)
+		start_intro()
+	else:
+		boss._start_next_phase()
+		
 
 func hide_all():
 	label_boss_name.hide()

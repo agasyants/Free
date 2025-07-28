@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bg3a80qdgk515" path="res://menu/MainMenu.gd" id="1_su865"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_su865"]
-font_size = 200
+font_size = 256
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -28,10 +28,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -172.0
-offset_top = 81.0
-offset_right = 174.0
-offset_bottom = 354.0
+offset_left = -221.0
+offset_top = 65.0
+offset_right = 222.0
+offset_bottom = 414.0
 grow_horizontal = 2
 text = "IRØ"
 label_settings = SubResource("LabelSettings_su865")
@@ -42,25 +42,25 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -143.0
-offset_top = 345.0
-offset_right = 144.0
-offset_bottom = -165.0
+offset_left = -181.0
+offset_top = 381.0
+offset_right = 152.0
+offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 text = "Bosses"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 text = "Quit"

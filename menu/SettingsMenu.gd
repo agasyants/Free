@@ -1,7 +1,7 @@
 extends Control
 
 var setting_controls = {}  # Словарь для хранения ссылок на элементы управления
-var categories = ["graphics", "gameplay", "controls"]  # Порядок категорий
+var categories = ["graphics", "debug", "controls", "gameplay"]  # Порядок категорий
 
 func _ready():
 	# Настройка кнопки возврата

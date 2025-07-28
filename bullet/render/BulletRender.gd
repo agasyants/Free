@@ -24,16 +24,16 @@ func draw_canvas(target: CanvasItem, bullet: BulletData) -> void:
 		
 	var CORE_COLOR := Color.WHITE * 4.0
 	var FLASH_COLOR := Color.WHITE * 8.0
-	var OUTLINE_RADIUS := 14.0
+	#var OUTLINE_RADIUS := 14.0
 
 	# Контур с резкой пульсацией
-	var pulse = abs(sin(t * 30.0)) * 3.0
-	target.draw_arc(pos, OUTLINE_RADIUS + pulse, 0, TAU, 16, 
+	var pulse = sin(t * 30.0)
+	target.draw_arc(pos, base_radius + pulse, 0, TAU, 16, 
 			Color.WHITE, 1.5 + pulse * 0.2, true)
 	
 	# Ядро с хаотичной пульсацией
-	var core_pulse = abs(sin(t * 40.0 + 1.0)) * 1.5 + abs(cos(t * 35.0)) * 1.2
-	target.draw_circle(pos, base_radius + core_pulse, CORE_COLOR)
+	var core_pulse = abs(sin(t * 40.0 + 1.0)) * 2 + abs(cos(t * 35.0)) * 2
+	target.draw_circle(pos, base_radius/3 + core_pulse, CORE_COLOR)
 	
 	# Резкая вспышка при появлении
 	if t < 0.15:  

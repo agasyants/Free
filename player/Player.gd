@@ -4,6 +4,7 @@ class_name Player
 var state: types.PlayerState = types.PlayerState.IDLE
 var radius: float = 22
 var is_active: bool = true
+var damaged_time: float = 0.0
 
 # Компоненты
 @onready var components = $Components
@@ -18,6 +19,17 @@ var is_active: bool = true
 @onready var label = get_node("/root/Node2D/CanvasLayer/Label")
 @onready var fps = get_node("/root/Node2D/CanvasLayer/FPS")
 
+func _ready() -> void:
+	if Settings.get_bool('fps'):
+		fps.show()
+	else:
+		fps.hide()
+	
+	if Settings.get_bool('state'):
+		label.show()
+	else:
+		label.hide()
+
 func _physics_process(delta):
 	if is_active:
 		# Обрабатываем все компоненты
@@ -26,15 +38,21 @@ func _physics_process(delta):
 		dash_component.handle(delta)
 		attack_component.handle(delta)
 		parry_component.handle(delta)
-		#print(state)
-		label.text = types.PlayerStateNames[state]
-		fps.text = str(Engine.get_frames_per_second())
 		# Применяем движение
 		move_and_slide()
 		# Ограничиваем границами экрана
-		#boundary_component.clamp_to_screen()
+		boundary_component.clamp_to_arena()
 	animation_component.handle(delta)
-
+	
+	if damaged_time > 0:
+		damaged_time -= delta
+	
+	if Settings.get_bool('fps'):
+		fps.text = str(Engine.get_frames_per_second())
+	
+	if Settings.get_bool('state'):
+		label.text = types.PlayerStateNames[state]
+	
 # Публичные методы для взаимодействия компонентов
 func get_current_velocity() -> Vector2:
 	return velocity
@@ -51,8 +69,9 @@ func set_velocity_override(new_velocity: Vector2) -> void:
 	velocity = new_velocity
 	
 func take_damage(damage: int) -> void:
-	if health_component.take_damage(damage):
+	if await health_component.take_damage(damage):
 		animation_component.set_damaged()
+		damaged_time = 0.3
 
 func can_move() -> bool:
 	return not dash_component.is_dashing()

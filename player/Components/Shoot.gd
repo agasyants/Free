@@ -5,7 +5,7 @@ class_name ShootingComponent
 
 signal bullet_fired(bullet_position: Vector2, bullet_direction: Vector2)
 
-@export var shoot_cooldown: float = 0.16
+@export var shoot_cooldown: float = 0.3
 
 var shoot_cooldown_timer: float = 0.0
 
@@ -64,10 +64,10 @@ func create_bullet(position: Vector2, direction: Vector2) -> void:
 	bullet_manager.spawn_bullet({
 		"position": position,
 		"velocity": direction,
-		"speed": 600.0,
-		"damage": 2,
+		"speed": 800.0,
+		"damage": 4,
 		"health": 1,
-		"radius": 6.0,
+		"radius": 10.0,
 		"lifetime": 8.0,
 		"is_player": true,
 		"logic_id": "default",

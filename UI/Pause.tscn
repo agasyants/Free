@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c23xmgis2nc0e" path="res://UI/Pause.gd" id="1_h74dl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vyqui"]
-font_size = 64
+font_size = 128
 
 [node name="Pause" type="Control"]
 layout_mode = 3
@@ -34,32 +34,32 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -253.0
-offset_top = 250.0
-offset_right = 246.0
-offset_bottom = -195.0
+offset_left = -173.0
+offset_top = 274.0
+offset_right = 176.0
+offset_bottom = -41.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Resume"
 
 [node name="RestartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Restart"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "Menu"
 
 [node name="Label" type="Label" parent="."]
@@ -68,9 +68,9 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -91.0
-offset_top = 131.0
-offset_right = 94.0
-offset_bottom = -501.0
+offset_left = -182.0
+offset_top = 104.0
+offset_right = 188.0
+offset_bottom = -441.0
 text = "Pause"
 label_settings = SubResource("LabelSettings_vyqui")

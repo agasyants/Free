@@ -53,8 +53,18 @@ func take_damage(damage: float) -> bool:
 	# Запускаем i-фреймы
 	_start_invincibility()
 	
+	var camera: Camera = get_viewport().get_camera_2d()
+	camera.add_shake(2, 0.5, 0.03, Vector2.ZERO, false, true, 1.0)
+	
+	Engine.time_scale = 0.0
+	await get_tree().create_timer(0.01*damage/3, false, false, true).timeout
+	Engine.time_scale = 1.0
+
+	# Отбрасывание
+	#body.velocity += direction.normalized() * damage
+	
 	# Проверяем, не умер ли персонаж
-	if current_health <= 0 and Settings.can_die():
+	if current_health <= 0 and Settings.get_bool('diying'):
 		extra_lives -= 1
 		if extra_lives <= 0:
 			health_depleted.emit()

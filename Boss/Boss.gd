@@ -32,7 +32,7 @@ func _process(delta):
 	wave.update(delta)
 	if phase:
 		phase.update(delta)
-	#bound.clamp_to_screen()
+	bound.clamp_to_arena()
 		
 func take_damage(damage: int):
 	health.take_damage(damage)

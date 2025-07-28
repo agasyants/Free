@@ -8,8 +8,9 @@ func draw(target: CanvasItem, opacity: float, damaged: bool) -> void:
 	var fill_color := Color(1, 1, 1, opacity) if damaged else Color(0, 0, 0, opacity)
 	var stroke_color := Color(0, 0, 0, opacity) if damaged else Color(1, 1, 1, opacity)
 	
-	var dir = player.animation_component.target_direction.rotated(-player.rotation)
-	target.draw_line(Vector2.ZERO, dir * 1000, stroke_color, 1, Settings.is_aa())
+	if Settings.get_bool('laser'):
+		var dir = player.animation_component.target_direction.rotated(-player.rotation)
+		target.draw_line(Vector2.ZERO, dir * 1000, stroke_color, 1, Settings.is_aa())
 
 	# тело
 	target.draw_circle(Vector2.ZERO, radius, fill_color, true, -1, Settings.is_aa())

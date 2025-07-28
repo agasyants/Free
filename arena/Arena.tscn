@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2ngmw3qmo4xp"]
+
+[ext_resource type="Script" uid="uid://hh7klvtr38a1" path="res://arena/ClaudeArena.gd" id="1_2sj4i"]
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_2sj4i")
+base_color = Color(0.231373, 0.262745, 0.278431, 1)
+grid_color = Color(0.129559, 0.129558, 0.129558, 1)
+accent_color = Color(0.258012, 0.0815178, 0.0815457, 1)
+border_color = Color(0, 0, 0, 1)

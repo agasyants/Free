@@ -1,55 +1,59 @@
 extends Node
 class_name BoundaryComponent
 
-## Компонент ограничения границ экрана
-## Отвечает за удержание объекта в пределах экрана
+## Компонент ограничения границ арены (круг)
+## Отвечает за удержание объекта в пределах круга
 
 @export var use_sprite_bounds: bool = true
-@export var custom_margin: Vector2 = Vector2(-100,-100)
+@export var custom_margin: float = 0.0  # Дополнительный отступ от границы
+@onready var arena: Arena = get_node("/root/Node2D/Arena") # Предполагается, что Arena имеет `radius` и `position`
 
-# Ссылка на родительский узел
+# Ссылка на родительский узел (например, игрока)
 @onready var body: Node2D = get_parent().get_parent()
 
-func clamp_to_screen() -> void:
-	"""Ограничивает позицию объекта границами экрана"""
-	var screen_size = body.get_viewport_rect().size
-	var sprite_size = get_sprite_size()
+func clamp_to_arena() -> void:
+	"""Ограничивает позицию объекта границами круговой арены"""
+	if !arena:
+		push_error("Arena not set in BoundaryComponent!")
+		return
 	
-	var margin = sprite_size + custom_margin
+	var sprite_radius = get_sprite_radius() if use_sprite_bounds else 0.0
+	var max_radius = arena.radius - sprite_radius - custom_margin
 	
-	body.global_position.x = clamp(
-		body.global_position.x, 
-		margin.x, 
-		screen_size.x - margin.x
-	)
-	body.global_position.y = clamp(
-		body.global_position.y, 
-		margin.y, 
-		screen_size.y - margin.y
-	)
+	var direction = (body.global_position - arena.position).normalized()
+	var distance = arena.position.distance_to(body.global_position)
+	
+	if distance > max_radius:
+		body.global_position = arena.position + direction * max_radius
 
-func get_sprite_size() -> Vector2:
-	"""Получает размер спрайта для правильного ограничения"""
-	return Vector2(body.radius, body.radius)
+func get_sprite_radius() -> float:
+	"""Получает радиус спрайта (если объект круглый)"""
+	if body is Node2D and body.has_method("get_radius"):
+		return body.get_radius()
+	elif "radius" in body:  # Проверяем, есть ли свойство radius
+		return body.radius
+	else:
+		return 0.0
 
 func is_within_bounds(position: Vector2) -> bool:
-	"""Проверяет, находится ли позиция в пределах экрана"""
-	var screen_size = body.get_viewport_rect().size
-	var sprite_size = get_sprite_size()
-	var margin = sprite_size + custom_margin
+	"""Проверяет, находится ли позиция в пределах арены"""
+	if !arena:
+		return false
 	
-	return position.x >= margin.x and position.x <= screen_size.x - margin.x and \
-		   position.y >= margin.y and position.y <= screen_size.y - margin.y
+	var sprite_radius = get_sprite_radius() if use_sprite_bounds else 0.0
+	var max_radius = arena.radius - sprite_radius - custom_margin
+	
+	return arena.position.distance_to(position) <= max_radius
 
-func get_screen_bounds() -> Rect2:
-	"""Возвращает границы экрана с учетом размера спрайта"""
-	var screen_size = body.get_viewport_rect().size
-	var sprite_size = get_sprite_size()
-	var margin = sprite_size + custom_margin
+func get_arena_bounds() -> Dictionary:
+	"""Возвращает параметры арены (центр и радиус)"""
+	if !arena:
+		return {}
 	
-	return Rect2(
-		margin.x,
-		margin.y,
-		screen_size.x - margin.x * 2,
-		screen_size.y - margin.y * 2
-	)
+	var sprite_radius = get_sprite_radius() if use_sprite_bounds else 0.0
+	var effective_radius = arena.radius - sprite_radius - custom_margin
+	
+	return {
+		"center": arena.position,
+		"radius": effective_radius
+	}

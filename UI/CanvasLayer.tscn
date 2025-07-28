@@ -259,11 +259,10 @@ action = "parry"
 visibility_mode = 1
 
 [node name="Label" type="Label" parent="."]
-visible = false
-offset_left = 133.0
-offset_top = 188.0
-offset_right = 738.0
-offset_bottom = 447.0
+offset_left = 41.0
+offset_top = 184.0
+offset_right = 646.0
+offset_bottom = 363.0
 text = "Hello, World
 "
 label_settings = SubResource("LabelSettings_bvijt")
@@ -272,12 +271,13 @@ label_settings = SubResource("LabelSettings_bvijt")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 78.0
-offset_top = 304.0
-offset_right = -1052.0
-offset_bottom = -331.0
+offset_left = 50.0
+offset_top = 278.0
+offset_right = -1080.0
+offset_bottom = -354.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "60"
 label_settings = SubResource("LabelSettings_3mabw")
 
 [node name="Control" type="Control" parent="."]

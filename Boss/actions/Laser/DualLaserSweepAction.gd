@@ -1,9 +1,9 @@
 extends BossAction
 class_name DualLaserSweepAction
 
-var duration := 2.0
+var duration := 2.8
 var delay := 1.0
-var sweep_speed := 90.0
+var sweep_speed := 70.0
 var aim_dir1: Vector2
 var aim_dir2: Vector2
 
@@ -28,16 +28,16 @@ func update(delta: float) -> void:
 			{
 				"from": boss.global_position,
 				"direction": aim_dir1,
-				"damage": 10.0,
+				"damage": 20.0,
 				"color": Color.RED,
-				"width": 30.0
+				"width": 25.0
 			},
 			{
 				"from": boss.global_position,
 				"direction": aim_dir2,
-				"damage": 10.0,
+				"damage": 20.0,
 				"color": Color.RED,
-				"width": 30.0
+				"width": 25.0
 			}
 		])
 	else:

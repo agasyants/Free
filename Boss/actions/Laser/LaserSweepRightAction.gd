@@ -26,7 +26,7 @@ func update(delta: float) -> void:
 			{
 				"from": boss.global_position,
 				"direction": aim_dir,
-				"damage": 20.0,
+				"damage": 30.0,
 				"color": Color.RED,
 				"width": 40.0
 			}

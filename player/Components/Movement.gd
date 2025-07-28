@@ -37,7 +37,10 @@ func handle(delta: float) -> void:
 	
 	# Применяем движение
 	if input_vector != Vector2.ZERO:
-		body.velocity = input_vector * current_speed
+		if body.damaged_time > 0:
+			body.velocity = input_vector * current_speed / 3
+		else:
+			body.velocity = input_vector * current_speed
 	else:
 		body.velocity = Vector2.ZERO
 

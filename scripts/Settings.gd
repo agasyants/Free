@@ -42,6 +42,10 @@ var CONFIG = {
 	},
 	
 	"gameplay": {
+		"laser": {
+			"label": "Aim Laser",
+			"type": "checkbox",
+		},
 		#"difficulty": {
 			#"label": "Difficulty",
 			#"type": "option",
@@ -55,10 +59,6 @@ var CONFIG = {
 			#"label": "Camera Shake",
 			#"type": "checkbox"
 		#},
-		"diying": {
-			"label": "Can You Die",
-			"type": "checkbox"
-		}
 	},
 	
 	"controls": {
@@ -82,6 +82,22 @@ var CONFIG = {
 			"label": "Controller Vibration",
 			"type": "checkbox"
 		}
+	},
+	
+	"debug": {
+		"diying": {
+			"label": "Can You Die",
+			"type": "checkbox"
+		},
+		"fps": {
+			"label": "Show FPS",
+			"type": "checkbox"
+		},
+		"state": {
+			"label": "Show Player State",
+			"type": "checkbox"
+		},
+		
 	}
 }
 
@@ -100,13 +116,17 @@ const DEFAULTS = {
 	#"difficulty": "normal",
 	#"auto_aim": false,
 	#"camera_shake": true,
-	"diying": true,
+	"laser": true,
 	
 	# Controls
 	#"keyboard_layout": "QWERTY",
 	#"mouse_sensitivity": 1.0,
 	#"invert_y_axis": false,
-	"vibration": true
+	"vibration": true,
+	
+	"fps": false,
+	"state": false,
+	"diying": true,
 }
 
 var settings = DEFAULTS.duplicate(true)
@@ -213,8 +233,5 @@ func apply_gameplay_settings():
 func apply_controls_settings():
 	pass  # Здесь будет логика применения настроек управления
 
-func can_die():
-	return settings["diying"]
-
-func shake():
-	return settings["vibration"]
+func get_bool(key: String):
+	return settings[key]
