@@ -15,7 +15,11 @@ func start():
 	)
 
 	add_transition(HeavySnipeAction, func(_prev):
-		return CircleAndShootAction.new()
+		var chance = randf()
+		if chance < 0.4:
+			return DashAttackAction.new()
+		else:
+			return CircleAndShootAction.new()
 	)
 
 	add_transition(CircleAndShootAction, func(_prev):

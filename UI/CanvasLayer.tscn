@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://colpl7nekbun5"]
+[gd_scene load_steps=24 format=3 uid="uid://colpl7nekbun5"]
 
+[ext_resource type="Script" uid="uid://3rj15pqly1g1" path="res://UI/UIController.gd" id="1_l3hbm"]
 [ext_resource type="Script" uid="uid://dp5yfvb77d3u5" path="res://Boss/BossHPBar.gd" id="1_r3wg6"]
 [ext_resource type="Script" uid="uid://cvrceu2wa8gyk" path="res://UI/VirtualStick.gd" id="2_lxxjw"]
 [ext_resource type="Texture2D" uid="uid://bbuvg7m4h3syw" path="res://assets/button_stick.tres" id="3_ykr1e"]
@@ -62,6 +63,7 @@ fill_from = Vector2(0.5, 0.5)
 radius = 37.14
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_l3hbm")
 
 [node name="BossHealthBar" type="Control" parent="."]
 layout_mode = 3
@@ -212,7 +214,7 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("3_ykr1e")
 
-[node name="Buttons" type="Control" parent="."]
+[node name="RightButtons" type="Control" parent="."]
 z_index = 7
 layout_mode = 3
 anchors_preset = 3
@@ -228,7 +230,7 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="DashButton" type="TouchScreenButton" parent="Buttons"]
+[node name="DashButton" type="TouchScreenButton" parent="RightButtons"]
 z_index = 10
 position = Vector2(117, 109)
 scale = Vector2(0.9, 0.9)
@@ -238,7 +240,7 @@ shape = SubResource("CircleShape2D_3vw7n")
 action = "dash"
 visibility_mode = 1
 
-[node name="AttackButton" type="TouchScreenButton" parent="Buttons"]
+[node name="AttackButton" type="TouchScreenButton" parent="RightButtons"]
 z_index = 9
 position = Vector2(-13, 32)
 scale = Vector2(0.9, 0.9)
@@ -248,7 +250,30 @@ shape = SubResource("CircleShape2D_3vw7n")
 action = "attack"
 visibility_mode = 1
 
-[node name="ParryButton" type="TouchScreenButton" parent="Buttons"]
+[node name="ParryButton" type="TouchScreenButton" parent="RightButtons"]
+z_index = 8
+position = Vector2(221, -3)
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("4_33dgs")
+texture_pressed = ExtResource("5_t1o8s")
+shape = SubResource("CircleShape2D_vmibe")
+action = "parry"
+visibility_mode = 1
+
+[node name="LeftButtons" type="Control" parent="."]
+z_index = 7
+layout_mode = 3
+anchor_top = 0.997
+anchor_bottom = 0.997
+offset_left = 73.0
+offset_top = -148.84
+offset_right = 438.0
+offset_bottom = 17.16
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ParryButton" type="TouchScreenButton" parent="LeftButtons"]
 z_index = 8
 position = Vector2(221, -3)
 scale = Vector2(0.9, 0.9)

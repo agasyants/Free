@@ -9,7 +9,7 @@ signal intro_finished
 
 var boss_name: String = "RED"
 var countdown_start := 3
-var auto_start := true
+@export var auto_start := true
 var beat: float = 0.37974683544
 
 @onready var player: Player = null

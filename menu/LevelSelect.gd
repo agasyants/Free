@@ -4,6 +4,7 @@ extends Control
 var levels = [
 	{"name": "Boss", "path": "res://levels/Main.tscn"},
 	{"name": "Test", "path": "res://levels/test.tscn"},
+	{"name": "Easy", "path": "res://levels/Easy.tscn"},
 ]
 
 func _ready():

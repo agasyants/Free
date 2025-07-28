@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://bshgejb2iq11m"]
+
+[ext_resource type="PackedScene" uid="uid://cmljcpcyimrfu" path="res://player/Player.tscn" id="1_6nom6"]
+[ext_resource type="PackedScene" uid="uid://dcrd5f6c7steb" path="res://Boss/EasyBoss/EasyBoss.tscn" id="2_ouflr"]
+[ext_resource type="PackedScene" uid="uid://colpl7nekbun5" path="res://UI/CanvasLayer.tscn" id="3_mqsyc"]
+[ext_resource type="Script" uid="uid://dpxgxcp7pkr5e" path="res://scripts/CameraController.gd" id="4_6cv15"]
+[ext_resource type="AudioStream" uid="uid://tyy5x7r1ex60" path="res://music/inferno.ogg" id="6_6nom6"]
+[ext_resource type="PackedScene" uid="uid://c62w14pjthypx" path="res://cutscenes/PhaseManager.tscn" id="6_sfvet"]
+[ext_resource type="PackedScene" uid="uid://d2ngmw3qmo4xp" path="res://arena/Arena.tscn" id="7_odgrg"]
+[ext_resource type="Script" uid="uid://c4m3pap7e76mj" path="res://bullet/BulletManager.gd" id="8_1paaa"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Arena" parent="." instance=ExtResource("7_odgrg")]
+position = Vector2(634, 362)
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_6nom6")]
+position = Vector2(495, 317)
+
+[node name="Boss" parent="." groups=["enemies"] instance=ExtResource("2_ouflr")]
+position = Vector2(777, 418)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_mqsyc")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(639, 364)
+script = ExtResource("4_6cv15")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6nom6")
+volume_db = -10.4
+autoplay = true
+parameters/looping = false
+
+[node name="PhaseManager" parent="." instance=ExtResource("6_sfvet")]
+auto_start = false
+
+[node name="BulletManager" type="Node2D" parent="."]
+z_index = 1000
+z_as_relative = false
+script = ExtResource("8_1paaa")

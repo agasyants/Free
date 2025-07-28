@@ -49,10 +49,7 @@ func get_input_vector() -> Vector2:
 	if move_stick.get_vector().length() > 0.1:
 		return move_stick.get_vector().normalized()
 	else:
-		return Vector2(
-			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-		).normalized()
+		return Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
 func get_last_direction() -> Vector2:
 	"""Возвращает последнее направление движения"""

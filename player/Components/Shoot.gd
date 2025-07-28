@@ -76,6 +76,7 @@ func create_bullet(position: Vector2, direction: Vector2) -> void:
 
 func get_shoot_direction() -> Vector2:
 	"""Возвращает направление стрельбы (к позиции мыши или из стика)"""	
+	print(Input.get_connected_joypads())
 	if aim_stick.get_vector().length() > 0.1:
 		return aim_stick.get_vector().normalized()
 	else:

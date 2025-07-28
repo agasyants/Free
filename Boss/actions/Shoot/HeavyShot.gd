@@ -1,7 +1,7 @@
 extends BossAction
 class_name HeavySnipeAction
 
-var aim_time := 1.0
+var aim_time := 0.6
 var fired := false
 
 func update(delta: float):
@@ -13,4 +13,6 @@ func update(delta: float):
 		fired = true
 		var dir = boss.shoot.get_direction_to_player()
 		boss.shoot.shoot(boss.global_position, dir, "heavy")
+	
+	if timer > 1.0:
 		finished = true

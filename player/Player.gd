@@ -20,12 +20,12 @@ var damaged_time: float = 0.0
 @onready var fps = get_node("/root/Node2D/CanvasLayer/FPS")
 
 func _ready() -> void:
-	if Settings.get_bool('fps'):
+	if Settings.get_setting('fps'):
 		fps.show()
 	else:
 		fps.hide()
 	
-	if Settings.get_bool('state'):
+	if Settings.get_setting('state'):
 		label.show()
 	else:
 		label.hide()
@@ -47,10 +47,10 @@ func _physics_process(delta):
 	if damaged_time > 0:
 		damaged_time -= delta
 	
-	if Settings.get_bool('fps'):
+	if Settings.get_setting('fps'):
 		fps.text = str(Engine.get_frames_per_second())
 	
-	if Settings.get_bool('state'):
+	if Settings.get_setting('state'):
 		label.text = types.PlayerStateNames[state]
 	
 # Публичные методы для взаимодействия компонентов

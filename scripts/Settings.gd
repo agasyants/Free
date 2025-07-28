@@ -10,7 +10,7 @@ var CONFIG = {
 		"render_resolution": {
 			"label": "Resolution",
 			"type": "option",
-			"options": ["480p", "720p", "native"]
+			"options": ["480p", "720p", "fullhd", "native"]
 		},
 		#"bullet_draw_mode": {
 			#"label": "Bullet Draw Mode",
@@ -62,11 +62,11 @@ var CONFIG = {
 	},
 	
 	"controls": {
-		#"keyboard_layout": {
-			#"label": "Keyboard Layout",
-			#"type": "option",
-			#"options": ["QWERTY", "AZERTY", "DVORAK"]
-		#},
+		"parry_layout": {
+			"label": "Parry Button Location",
+			"type": "option",
+			"options": ["right", "left", "right/left"]
+		},
 		#"mouse_sensitivity": {
 			#"label": "Mouse Sensitivity",
 			#"type": "range",
@@ -119,7 +119,7 @@ const DEFAULTS = {
 	"laser": true,
 	
 	# Controls
-	#"keyboard_layout": "QWERTY",
+	"parry_layout": "right",
 	#"mouse_sensitivity": 1.0,
 	#"invert_y_axis": false,
 	"vibration": true,
@@ -182,6 +182,9 @@ func apply_graphics_settings():
 		"720p":
 			set_resolution("viewport", "keep")
 			size = Vector2i(1280, 720)
+		"fullhd":
+			set_resolution("viewport", "keep")
+			size = Vector2i(1920, 1080)
 		"native":
 			set_resolution("canvas_items", "expand")
 			# Для native — просто оставим текущий экран
@@ -233,5 +236,5 @@ func apply_gameplay_settings():
 func apply_controls_settings():
 	pass  # Здесь будет логика применения настроек управления
 
-func get_bool(key: String):
+func get_setting(key: String):
 	return settings[key]
