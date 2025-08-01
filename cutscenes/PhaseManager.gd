@@ -27,7 +27,7 @@ func _ready():
 		start_intro()
 	else:
 		boss._start_next_phase()
-		
+		pass
 
 func hide_all():
 	label_boss_name.hide()
@@ -54,7 +54,7 @@ func show_and_hide(label:Label, k:float):
 	label.show()
 
 	var tween := create_tween()
-	tween.tween_interval(1.0/k)  # ждём 2 секунды
+	tween.tween_interval(1.0/k)
 	tween.tween_property(label, "modulate:a", 0.0, 2.0/k)  # исчезает за 2 секунды
 	tween.tween_callback(label.hide)  # полностью скрываем (опционально)
 

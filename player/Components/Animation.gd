@@ -39,9 +39,13 @@ func _ready():
 	register_animation("IDLE", IdleAnimation.new(body))
 	register_animation("DASH", DashAnimation.new(body))
 	register_animation("CHARGING_DASH", ChargingDashAnimation.new(body))
+	register_animation("CHARGING_ATTACK", ChargingAttackAnimation.new(body))
 	register_animation("SHOOT", ShootAnimation.new(body))
 	register_animation("PARRY", ParryAnimation.new(body))
-	register_animation("ATTACK", AttackAnimation.new(body))
+	register_animation("ATTACK_1", LightSlashAnimation1.new(body))
+	register_animation("ATTACK_2", LightSlashAnimation1.new(body))
+	register_animation("ATTACK_3", LightSlashAnimation2.new(body))
+	register_animation("CHARGED_ATTACK", ChargedSlashAnimation.new(body))
 	play("IDLE")  # или "DASH" для теста
 
 # Registering
@@ -52,7 +56,7 @@ func play(anim_id: String) -> void:
 	if anim_id != current_id:
 		previous_id = current_id
 		current_id = anim_id
-		transition = 1.0
+		transition = types.state_accelerations[body.state]*3
 		animations[current_id].reset()
 
 # External state
@@ -139,7 +143,7 @@ func _draw() -> void:
 	var blink_opacity = 1.0  if blink_visible else 0.0
 	var combined_damaged := damaged or not blink_visible
 	
-	draw_set_transform(body.position, body.rotation, Vector2.ONE)
+	#draw_set_transform(Vector2.ZERO, body.rotation, Vector2.ONE)
 
 	if previous_opacity > 0.0 and animations.has(previous_id):
 		animations[previous_id].draw(self, previous_opacity * blink_opacity, combined_damaged)
@@ -147,4 +151,4 @@ func _draw() -> void:
 	if current_opacity > 0.0 and animations.has(current_id):
 		animations[current_id].draw(self, current_opacity * blink_opacity, combined_damaged)
 	
-	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+	#draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)

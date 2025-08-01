@@ -5,7 +5,7 @@ class_name ShootingComponent
 
 signal bullet_fired(bullet_position: Vector2, bullet_direction: Vector2)
 
-@export var shoot_cooldown: float = 0.3
+@export var shoot_cooldown: float = 0.24
 
 var shoot_cooldown_timer: float = 0.0
 
@@ -28,7 +28,7 @@ func handle(delta: float) -> void:
 	update_cooldown_timer(delta)
 	
 	# Проверяем нажатие кнопки стрельбы
-	var shoot_pressed = Input.is_action_pressed("shoot") or aim_stick.get_vector().length() > 0.1
+	var shoot_pressed = Input.is_action_pressed("shoot") or aim_stick.get_vector().length() > 0.1 or Input.get_vector("left", "right", "up", "down").length() > 0.1
 	
 	if shoot_pressed:
 		if can_shoot():
@@ -67,7 +67,7 @@ func create_bullet(position: Vector2, direction: Vector2) -> void:
 		"speed": 800.0,
 		"damage": 4,
 		"health": 1,
-		"radius": 10.0,
+		"radius": 14.0,
 		"lifetime": 8.0,
 		"is_player": true,
 		"logic_id": "default",
@@ -75,9 +75,11 @@ func create_bullet(position: Vector2, direction: Vector2) -> void:
 	})
 
 func get_shoot_direction() -> Vector2:
-	"""Возвращает направление стрельбы (к позиции мыши или из стика)"""	
-	print(Input.get_connected_joypads())
-	if aim_stick.get_vector().length() > 0.1:
+	"""Возвращает направление стрельбы (к позиции мыши или из стика)"""
+	var inp = Input.get_vector("left", "right", "up", "down")
+	if Input.get_connected_joypads().size() > 0 and inp.length() > 0.1:
+		return inp.normalized()
+	elif aim_stick.get_vector().length() > 0.1:
 		return aim_stick.get_vector().normalized()
 	else:
 		var mouse_pos = body.get_global_mouse_position()

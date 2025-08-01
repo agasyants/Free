@@ -112,6 +112,11 @@ func _process(delta: float):
 	var target_zoom_val = clamp(min(required_zoom_x, required_zoom_y), min_zoom, max_zoom)
 	var target_zoom = Vector2(target_zoom_val, target_zoom_val)
 	zoom = zoom.lerp(target_zoom, delta * zoom_smoothing_speed)
+	
+	if !_is_finite_vec2(global_position):
+		global_position = Vector2.ZERO
+		smoothed_position = Vector2.ZERO
+		zoom = Vector2.ONE / 4
 
 	# ——— Кэш видимой области ———
 	var half_extents = (screen_size * 0.5) / zoom
@@ -122,7 +127,7 @@ func is_visible_in_camera(point: Vector2, radius: float = 0.0) -> bool:
 
 # ———————————————————————
 # 🎥 SHAKE SYSTEM
-# ———————————————————————
+# ———————————————————————ывв
 
 func add_shake(
 	strength: float = 1.0,
@@ -140,10 +145,22 @@ func add_shake(
 func _update_shakes(delta: float):
 	var total := Vector2.ZERO
 	for shake in active_shakes:
-		total += shake.update(delta)
-	active_shakes = active_shakes.filter(func(s): return s.timer < s.duration)
+		var _offset = shake.update(delta)
+		# Проверяем конечность смещения
+		if _is_finite_vec2(_offset):
+			total += _offset
+		else:
+			push_error("Invalid shake offset detected!")
+	active_shakes = active_shakes.filter(func(s): 
+		return s.timer < s.duration and _is_finite(s.strength)
+	)
 	shake_offset = total
 
+func _is_finite_vec2(v: Vector2) -> bool:
+	return is_finite(v.x) and is_finite(v.y)
+
+func _is_finite(f: float) -> bool:
+	return not (is_nan(f) or is_inf(f))
 
 func get_laser_clipped_point_optimized(origin: Vector2, direction: Vector2) -> Vector2:
 	if direction.length_squared() < 0.0001:

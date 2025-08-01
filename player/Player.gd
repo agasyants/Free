@@ -30,6 +30,13 @@ func _ready() -> void:
 	else:
 		label.hide()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("slow"):
+		if Engine.time_scale == 1.0:
+			Engine.time_scale = 0.1
+		else:
+			Engine.time_scale = 1.0
+
 func _physics_process(delta):
 	if is_active:
 		# Обрабатываем все компоненты
@@ -62,7 +69,8 @@ func set_state(new_state: types.PlayerState) -> void:
 		return
 	
 	state = new_state
-	animation_component.play(types.PlayerStateNames[state])
+	if state != types.PlayerState.ATTACK:
+		animation_component.play(types.PlayerStateNames[state])
 	#animation_component.play("DASH")
 
 func set_velocity_override(new_velocity: Vector2) -> void:

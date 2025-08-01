@@ -129,7 +129,7 @@ func get_dash_cooldown_progress() -> float:
 	return 1.0 - (dash_cooldown_timer / dash_cooldown)
 
 func is_charging() -> bool:
-	return body.state == types.PlayerState.CHARGING_DASH or body.state == types.PlayerState.CHARGING_DASH_AND_ATTACK
+	return body.state == types.PlayerState.CHARGING_DASH
 
 func is_dashing() -> bool:
-	return body.state == types.PlayerState.DASH or body.state == types.PlayerState.CHARGING_ATTACK_AND_DASHING
+	return body.state == types.PlayerState.DASH

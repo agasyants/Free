@@ -55,7 +55,4 @@ func _reset_stick():
 	$Stick.position = origin - $Stick.size / 2
 	
 func get_vector() -> Vector2:
-	if Input.get_connected_joypads().size() > 0:
-		return Input.get_vector("left", "right", "up", "down")
-	else:
-		return direction / radius if radius > 0 else Vector2.ZERO
+	return direction / radius if radius > 0 else Vector2.ZERO
