@@ -9,7 +9,7 @@ func starting(dur: float) -> void:
 	dur = clamp(dur, 0.0, 2.5) / 5
 	TOTAL_DURATION = dur
 	ATTACK_DURATION = dur
-	DAMAGE = 8
+	DAMAGE = 12
 	finished = false
 	timer = 0.0
 	damaged_bodies.clear()
@@ -34,3 +34,4 @@ func on_body_entered(body: Node2D) -> void:
 		return
 	damaged_bodies[body] = true
 	body.take_damage(DAMAGE)
+	finished = true

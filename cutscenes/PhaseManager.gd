@@ -26,7 +26,7 @@ func _ready():
 		player.set_active(false)
 		start_intro()
 	else:
-		boss._start_next_phase()
+		#boss._start_next_phase()
 		pass
 
 func hide_all():

@@ -1,11 +1,10 @@
 extends Area2D
 class_name MeleeAttackComponent
 
-@export var combo_window := 0.5
-@export var pre_finish_window := 0.2
-@export var post_combo_cooldown := 0.2
+@export var combo_window := 0.35
+@export var pre_finish_window := 0.15
+@export var post_combo_cooldown := 0.7
 @export var charge_threshold := 0.6
-@export var damage_duration := 0.1
 
 var combo_attacks: Array[MeleeAttack] = []
 var charged_attack: MeleeAttack
@@ -18,6 +17,7 @@ var combo_ready: bool = false
 var post_combo_timer: float = 0.0
 
 var is_charging: bool = false
+var should_attack: bool = false
 
 var hit_targets: Array = []
 
@@ -45,9 +45,12 @@ func _dash_ended():
 		body.set_state(types.PlayerState.CHARGING_ATTACK)
 
 func handle(delta: float) -> void:
+	
+	if post_combo_timer > 0.0:
+		post_combo_timer -= delta
+	
 	if current_attack != null:
 		current_attack.update(delta)
-
 		var attack_time_left = current_attack.get_time_left()
 
 		# Окно начала следующего комбо чуть до окончания текущего
@@ -72,40 +75,20 @@ func handle(delta: float) -> void:
 		combo_ready = false
 		combo_index = 0
 
-	if post_combo_timer > 0.0:
-		post_combo_timer -= delta
-
 func _input(event: InputEvent) -> void:
 	if not body.is_active:
 		return
 
 	if event.is_action_pressed("attack") or (event.is_action_pressed("attack_pc") and !DisplayServer.is_touchscreen_available()):
-		get_viewport().set_input_as_handled()
-		# Блокируем атаку, если в кулдауне после комбо
-		if post_combo_timer > 0.0:
-			return
-
-		# Если можно продолжить комбо
-		if combo_ready and current_attack == null and combo_index < combo_attacks.size():
-			_start_attack(combo_attacks[combo_index])
-			combo_index += 1
-			combo_timer = combo_window
-			combo_ready = false
-			return
-
 		# Если ничего не происходит — начинаем заряд
-		if current_attack == null:
+		if current_attack == null and !(post_combo_timer > 0.0):
 			_start_charge()
-	
 	else:
 		if event.is_action_pressed("parry") or event.is_action_pressed("shoot"):
 			is_charging = false
 
 	if event.is_action_released("attack") or (event.is_action_released("attack_pc") and !DisplayServer.is_touchscreen_available()):
-		if is_charging:
-			_release_attack()
-		charge_timer = 0.0
-		get_viewport().set_input_as_handled()
+		_release_attack()
 
 func _start_charge() -> void:
 	if current_attack != null or body.state == types.PlayerState.ATTACK:
@@ -118,31 +101,44 @@ func _release_attack() -> void:
 	if charge_timer >= charge_threshold:
 		current_attack = charged_attack
 		charged_attack.starting(charge_timer)
-		is_charging = false
 		body.set_state(types.PlayerState.ATTACK)
 		_enable_damage()
-	else:
-		if combo_index < combo_attacks.size():
-			_start_attack(combo_attacks[combo_index])
-			combo_index += 1
-			combo_timer = combo_window
-		else:
-			combo_index = 0
-			post_combo_timer = post_combo_cooldown
+	elif !(post_combo_timer > 0.0):
+		# Если можно продолжить комбо
+		if current_attack == null:
+			_start_attack()
+		elif combo_ready:
+			should_attack = true
+	if is_charging:
+		is_charging = false
+		charge_timer = 0.0
+		if body.state == types.PlayerState.CHARGING_ATTACK:
+			body.set_state(types.PlayerState.IDLE)
 
-func _start_attack(attack: MeleeAttack) -> void:
-	current_attack = attack
+func _start_attack() -> void:
+	current_attack = combo_attacks[combo_index]
 	current_attack.start()
 	body.set_state(types.PlayerState.ATTACK)
 	_enable_damage()
+	combo_index += 1
+	combo_timer = combo_window
+	combo_ready = false
+	if combo_index >= combo_attacks.size():
+		combo_index = 0
+		post_combo_timer = post_combo_cooldown
 
 func _end_attack() -> void:
 	if current_attack:
 		current_attack.cancel()
-	current_attack = null
-	body.set_state(types.PlayerState.IDLE)
-	is_charging = false
-	_disable_damage()
+	if !should_attack:
+		current_attack = null
+		body.set_state(types.PlayerState.IDLE)
+		is_charging = false
+		charge_timer = 0.0
+		_disable_damage()
+	else:
+		_start_attack()
+		should_attack = false
 
 func _enable_damage() -> void:
 	hit_targets.clear()

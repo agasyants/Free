@@ -23,10 +23,9 @@ var charge_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
-var body: CharacterBody2D
+var body: Player
 var movement_component: MovementComponent
 var health_component: HealthComponent
-
 
 func _ready():
 	body = get_parent().get_parent()
@@ -96,7 +95,7 @@ func start_dash() -> void:
 		if body.velocity.length_squared() > 0:
 			input_direction = body.velocity.normalized()
 		else:
-			input_direction = Vector2.RIGHT
+			input_direction = body.animation_component.get_current_direction()
 	
 	body.set_state(types.PlayerState.DASH)
 	

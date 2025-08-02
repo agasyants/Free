@@ -15,7 +15,7 @@ var cooldown_timer: float = 0.0
 @onready var body: CharacterBody2D = get_parent().get_parent()
 
 func handle(delta: float) -> void:
-	if Input.is_action_pressed("parry") and cooldown_timer <= 0.0 and not is_parrying():
+	if Input.is_action_just_pressed("parry") and cooldown_timer <= 0.0 and not is_parrying():
 		_start_parry()
 
 	if cooldown_timer > 0.0:
