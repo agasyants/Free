@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dicvokuwuqkk3"]
+[gd_scene load_steps=12 format=3 uid="uid://dicvokuwuqkk3"]
 
 [ext_resource type="Script" uid="uid://dqyfbarv35cmx" path="res://Boss/Boss.gd" id="1_sbnmg"]
 [ext_resource type="Script" uid="uid://vhcfmbm21o3d" path="res://Boss/components/BossMovement.gd" id="2_sdoex"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://7qk54t66fmrl" path="res://Boss/components/BossHealth.gd" id="4_onhe5"]
 [ext_resource type="Script" uid="uid://ceyu434inj5hb" path="res://Boss/components/BossLaser.gd" id="7_7ck7k"]
 [ext_resource type="Script" uid="uid://2hlonibn60ew" path="res://player/Components/Boundary.gd" id="7_yhums"]
+[ext_resource type="Script" uid="uid://pi26u5w5fug2" path="res://Boss/components/BossAnimation.gd" id="8_xtogi"]
 [ext_resource type="Script" uid="uid://uskxlv85ywp5" path="res://Boss/components/BossWave.gd" id="8_yhums"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yhums"]
@@ -33,7 +34,7 @@ debug_color = Color(0.836953, 0.366634, 0.994606, 0.42)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_4xi7c")
 
-[node name="Components" type="Node" parent="."]
+[node name="Components" type="Node2D" parent="."]
 
 [node name="BossMovementComponent" type="Node" parent="Components"]
 script = ExtResource("2_sdoex")
@@ -48,10 +49,14 @@ script = ExtResource("4_onhe5")
 script = ExtResource("7_7ck7k")
 
 [node name="BossWaveComponent" type="Node2D" parent="Components"]
+top_level = true
 script = ExtResource("8_yhums")
 
 [node name="BossBoundaryComponent" type="Node" parent="Components"]
 script = ExtResource("7_yhums")
+
+[node name="BossAnimationComponent" type="Node2D" parent="Components"]
+script = ExtResource("8_xtogi")
 
 [node name="ShootPoint" type="Node2D" parent="."]
 position = Vector2(37, 0)

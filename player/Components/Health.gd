@@ -23,7 +23,7 @@ signal player_knocked
 var is_invincible: bool = false
 var invincibility_timer: float = 0.0
 
-@onready var body: Node = get_parent().get_parent()
+@onready var body: Player = get_parent().get_parent()
 @onready var animation_component: AnimationComponent = body.get_node("AnimationComponent") if body.has_node("AnimationComponent") else null
 
 func _ready():
@@ -39,7 +39,7 @@ func _process(delta: float):
 	if is_healing:
 		healing(delta)
 
-func take_damage(damage: float) -> bool:
+func take_damage(damage: float, power: float, _type: String, direction: Vector2) -> bool:
 	"""Наносит урон персонажу. Возвращает true, если урон был нанесен"""
 	if is_invincible or damage <= 0 or body.state == types.PlayerState.DASH or is_healing:
 		return false
@@ -54,14 +54,15 @@ func take_damage(damage: float) -> bool:
 	_start_invincibility()
 	
 	var camera: Camera = get_viewport().get_camera_2d()
-	camera.add_shake(damage/3, 0.6, 0.01, Vector2.ZERO, true, true, 1.0)
+	camera.add_shake(damage/3*power, 0.6, 0.01, Vector2.ZERO, true, true, 1.0)
 	
 	Engine.time_scale = 1.0/damage
 	await get_tree().create_timer(0.05, false, false, true).timeout
 	Engine.time_scale = 1.0
 
 	# Отбрасывание
-	#body.velocity += direction.normalized() * damage
+	if power > 1:
+		body.movement_component.add_recoil(direction, 600 * (power-1))
 	
 	# Проверяем, не умер ли персонаж
 	if current_health <= 0 and Settings.get_setting('diying'):

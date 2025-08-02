@@ -76,8 +76,8 @@ func set_state(new_state: types.PlayerState) -> void:
 func set_velocity_override(new_velocity: Vector2) -> void:
 	velocity = new_velocity
 	
-func take_damage(damage: int) -> void:
-	if await health_component.take_damage(damage):
+func take_damage(damage: int, power: float, type: String, direction: Vector2) -> void:
+	if await health_component.take_damage(damage, power, type, direction):
 		animation_component.set_damaged()
 		damaged_time = 0.3
 

@@ -32,14 +32,7 @@ func on_body_entered(body: Node2D) -> void:
 		return
 
 	damaged_bodies[body] = true
-	body.take_damage(DAMAGE)
-	
-	var camera: Camera = owner.get_viewport().get_camera_2d()
-	camera.add_shake(6, 0.25, 0.01, Vector2.ZERO, true, true, 2.0)
-	
-	Engine.time_scale = 0.0
-	await owner.get_tree().create_timer(0.08, false, false, true).timeout
-	Engine.time_scale = 1.0
+	body.take_damage(DAMAGE, 2, 'melee', direction)
 
 func get_time_left() -> float:
 	return TOTAL_DURATION - timer

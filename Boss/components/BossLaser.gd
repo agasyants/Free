@@ -32,7 +32,7 @@ func fire_lasers(lasers_array: Array):
 		if result:
 			to = result.position
 			if result.collider == player:
-				player.take_damage(damage)
+				player.take_damage(damage, 1, 'laser', Vector2.ZERO)
 		
 		current_lasers.append({
 			"from": from,

@@ -26,9 +26,6 @@ func update(delta: float):
 		var dir = boss.shoot.get_direction_to_player()
 		boss.shoot.shoot(boss.global_position, dir, 'fast')
 
-	boss.movement.update(delta)
-	#boss.shoot.update(delta)
-
 	if timer >= duration:
 		boss.movement.stop()
 		finished = true

@@ -7,7 +7,7 @@ func update(delta: float) -> void:
 			boss.global_position,
 			300.0,
 			Color(1, 0, 0, 0.4),
-			1.0,       # duration
+			1.5,
 			30
 		))
 		

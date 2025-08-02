@@ -11,8 +11,6 @@ func update(delta: float):
 		var dir = boss.movement.get_direction_to_player()
 		boss.movement.set_velocity(dir * dash_speed)
 
-	boss.movement.update(delta)
-
 	if timer >= dash_duration:
 		boss.movement.stop()
 		finished = true

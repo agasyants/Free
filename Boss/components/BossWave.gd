@@ -20,7 +20,7 @@ func update(delta: float) -> void:
 	for wave in active_waves:
 		wave.update(delta)
 		if wave.is_inside(player.global_position, player.radius):
-			player.take_damage(wave.damage)
+			player.take_damage(wave.damage, 1, 'wave', player.global_position - boss.global_position)
 	queue_redraw()
 
 func _draw() -> void:

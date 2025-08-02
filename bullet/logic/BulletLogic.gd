@@ -18,11 +18,11 @@ func on_body_entered(bullet: BulletData, body: Node) -> void:
 
 	if bullet.is_player:
 		if body.is_in_group("enemies") and body.has_method("take_damage"):
-			body.take_damage(bullet.damage)
+			body.take_damage(bullet.damage, 1, 'bullet', bullet.velocity)
 			bullet.health = 0
 	else:
 		if body.is_in_group("player") and body.has_method("take_damage"):
-			body.take_damage(bullet.damage)
+			body.take_damage(bullet.damage, 1, 'bullet', bullet.velocity)
 			bullet.health = 0
 
 func on_bullet_entered(bullet: BulletData, other: BulletData) -> void:

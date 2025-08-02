@@ -15,9 +15,6 @@ func update(delta: float):
 		shot = true
 		boss.shoot.shoot(boss.global_position, dir)
 
-	boss.movement.update(delta)
-	#boss.shoot.update(delta)
-
 	if timer >= move_duration:
 		boss.movement.stop()
 		finished = true

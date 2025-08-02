@@ -9,6 +9,7 @@ class_name Boss
 @onready var laser: BossLaserComponent = components.get_node("BossLaserComponent")
 @onready var wave: BossWaveComponent = components.get_node("BossWaveComponent")
 @onready var bound: BoundaryComponent = components.get_node("BossBoundaryComponent")
+@onready var animation: BossAnimationComponent = components.get_node("BossAnimationComponent")
 
 signal boss_knocked
 
@@ -30,12 +31,14 @@ func _ready():
 
 func _process(delta):
 	wave.update(delta)
+	animation.update(delta)
+	movement.update(delta)
 	if phase:
 		phase.update(delta)
 	bound.clamp_to_arena()
 		
-func take_damage(damage: int):
-	health.take_damage(damage)
+func take_damage(damage: int, power: float, type: String, direction: Vector2):
+	health.take_damage(damage, power, type, direction)
 
 func set_phase(new_phase: BossPhase):
 	phase = new_phase
@@ -79,7 +82,7 @@ func wait_for_player_respawn():
 	laser.clear_lasers()
 	
 func restart_current_phase():
-	var phase_class = phases[current_phase_index - 1]  # -1, т.к. уже увеличили
+	var phase_class = phases[current_phase_index - 1]
 	var new_phase = phase_class.new()
 	health.heal(health.max_health)
 	set_phase(new_phase)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcrd5f6c7steb"]
+[gd_scene load_steps=10 format=3 uid="uid://dcrd5f6c7steb"]
 
 [ext_resource type="Script" uid="uid://b4ld2dkhfm7hb" path="res://Boss/EasyBoss/EasyBoss.gd" id="1_nxhbt"]
 [ext_resource type="Script" uid="uid://vhcfmbm21o3d" path="res://Boss/components/BossMovement.gd" id="2_wiub6"]
@@ -7,18 +7,10 @@
 [ext_resource type="Script" uid="uid://ceyu434inj5hb" path="res://Boss/components/BossLaser.gd" id="5_la5vc"]
 [ext_resource type="Script" uid="uid://uskxlv85ywp5" path="res://Boss/components/BossWave.gd" id="6_ucscx"]
 [ext_resource type="Script" uid="uid://2hlonibn60ew" path="res://player/Components/Boundary.gd" id="7_l3d2t"]
+[ext_resource type="Script" uid="uid://pi26u5w5fug2" path="res://Boss/components/BossAnimation.gd" id="8_ytmsq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3qod"]
 radius = 32.0039
-
-[sub_resource type="Gradient" id="Gradient_sbnmg"]
-offsets = PackedFloat32Array(0.533088, 0.672794, 0.720588)
-colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_46ooc"]
-gradient = SubResource("Gradient_sbnmg")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
 
 [node name="Boss" type="CharacterBody2D"]
 collision_layer = 2
@@ -29,11 +21,7 @@ script = ExtResource("1_nxhbt")
 shape = SubResource("CircleShape2D_g3qod")
 debug_color = Color(0.836953, 0.366634, 0.994606, 0.42)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1000
-texture = SubResource("GradientTexture2D_46ooc")
-
-[node name="Components" type="Node" parent="."]
+[node name="Components" type="Node2D" parent="."]
 
 [node name="BossMovementComponent" type="Node" parent="Components"]
 script = ExtResource("2_wiub6")
@@ -48,10 +36,14 @@ script = ExtResource("4_gpxyl")
 script = ExtResource("5_la5vc")
 
 [node name="BossWaveComponent" type="Node2D" parent="Components"]
+top_level = true
 script = ExtResource("6_ucscx")
 
 [node name="BossBoundaryComponent" type="Node" parent="Components"]
 script = ExtResource("7_l3d2t")
+
+[node name="BossAnimationComponent" type="Node2D" parent="Components"]
+script = ExtResource("8_ytmsq")
 
 [node name="ShootPoint" type="Node2D" parent="."]
 position = Vector2(37, 0)

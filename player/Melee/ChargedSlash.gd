@@ -33,5 +33,5 @@ func on_body_entered(body: Node2D) -> void:
 	if not body.has_method("take_damage"):
 		return
 	damaged_bodies[body] = true
-	body.take_damage(DAMAGE)
+	body.take_damage(DAMAGE, 3, 'melee', direction)
 	finished = true
